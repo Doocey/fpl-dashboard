@@ -35,10 +35,6 @@ export default function PlayerPage(props) {
           {
             playerData.news.length ? <mark className="d-block">🚨 {playerData.news}</mark> : ''
           }
-  
-
-          {console.log(playerData.news)}
-          {console.info(playerData.news.length)}
         </div>
 
       </main>
