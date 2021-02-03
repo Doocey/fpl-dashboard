@@ -7,6 +7,7 @@ export default function FantasyLeague(params) {
       <Head>
         <title>Fantasy League Data</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="List of all registered Fantasy Premier League players."/>
       </Head>
 
       <main>

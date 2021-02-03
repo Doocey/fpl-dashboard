@@ -5,11 +5,15 @@ import Image from 'next/image'
 export default function PlayerPage(props) {
   const playerData = props.data.player
   const playerImage = `https://resources.premierleague.com/premierleague/photos/players/110x140/p${props.data.player.photo.replace('.jpg', '.png')}`
+  // Form the player's full name using string concat method this time - could have constructed different ways, but trying this out
+  const metaDescription = `Fantasy League profile for Arsenal's ${playerData.first_name.concat(' ', playerData.second_name)}`
   return (
     <div className="container">
       <Head>
         <title>{playerData.web_name}</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content={metaDescription}/>
+        <meta property="og:image" content={playerImage} />
       </Head>
 
       <main>
