@@ -21,17 +21,12 @@ export default function FantasyLeague(params) {
         <p>Each tile should route you to a specific player profile - using Next.js' Dynamic Routing.</p>
 
         <nav className="grid">
-            {/* Form Link To Profile Page */}
-            {
-              params.players.map(x =>
-                <Link href={'/' + JSON.stringify(x.id)}>
-                  <a key={x.id} className="card" key={x.id}>
-                    {x.web_name} - {x.id}
-                  </a>
-                </Link>
-              )
-            } 
-          </nav>        
+          {params.players.map((x) =>
+            <Link href={'/player/' + (x.id).toString()} key={(x.id).toString()}>
+              <a className="card">{x.web_name} - {x.id}</a>
+            </Link>
+          )} 
+        </nav>        
 
         {/* <p className="description">
           List of all Premier League teams with their FPL <code>ID</code>.
