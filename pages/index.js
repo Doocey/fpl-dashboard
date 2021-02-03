@@ -25,7 +25,7 @@ export default function FantasyLeague(params) {
             {
               params.players.map(x =>
                 <Link href={'/' + JSON.stringify(x.id)}>
-                  <a key={x.id} className="card">
+                  <a key={x.id} className="card" key={x.id}>
                     {x.web_name} - {x.id}
                   </a>
                 </Link>
