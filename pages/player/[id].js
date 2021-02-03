@@ -6,7 +6,7 @@ export default function PlayerPage(props) {
   const playerData = props.data.player
   const playerImage = `https://resources.premierleague.com/premierleague/photos/players/110x140/p${props.data.player.photo.replace('.jpg', '.png')}`
   // Form the player's full name using string concat method this time - could have constructed different ways, but trying this out
-  const metaDescription = `Fantasy League profile for Arsenal's ${playerData.first_name.concat(' ', playerData.second_name)}`
+  const metaDescription = `Fantasy League profile for ${playerData.team.name}'s ${playerData.first_name.concat(' ', playerData.second_name)}`
   return (
     <div className="container">
       <Head>
@@ -221,6 +221,9 @@ export async function getStaticProps({ params }) {
           web_name
           photo
           news
+          team {
+            name
+          }
         }
       }    
     `
