@@ -1,1 +1,3 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+# FPL Dashboard
+
+A Fantasy Premier League Dashboard, of sorts, driven by the official FPL API & built with Next.js

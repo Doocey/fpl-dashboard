@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Nav from '../components/Nav'
 
 export default function FantasyLeague(params) {
   return (
     <div className="container">
+      <Nav />
       <Head>
         <title>Fantasy League Data</title>
         <link rel="icon" href="/favicon.ico" />

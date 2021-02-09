@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import Image from 'next/image'
+import Nav from '../../components/Nav'
 
 export default function PlayerPage(props) {
   const playerData = props.data.player
@@ -15,6 +16,8 @@ export default function PlayerPage(props) {
         <meta name="description" content={metaDescription}/>
         <meta property="og:image" content={playerImage} />
       </Head>
+
+      <Nav />
 
       <main>
         <div className="card">
