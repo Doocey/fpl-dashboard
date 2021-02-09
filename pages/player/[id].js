@@ -204,6 +204,7 @@ export default function PlayerPage(props) {
 }
 
 export async function getStaticProps({ params }) {
+
   const client = new ApolloClient({
     uri: 'https://graphql-fpl.herokuapp.com',
     cache: new InMemoryCache()
