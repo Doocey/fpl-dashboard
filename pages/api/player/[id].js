@@ -7,7 +7,7 @@
 
 var https = require('follow-redirects').https;
 
-export default (req, res) => {
+export default function handler(req, res) {
 
   var options = {
     'method': 'GET',
@@ -36,7 +36,6 @@ export default (req, res) => {
   })
 
   request.end()
-
 }
 
 // Being resolved by FPL's server
