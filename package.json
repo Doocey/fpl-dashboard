@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.7",
+    "follow-redirects": "^1.13.2",
     "graphql": "^15.5.0",
     "next": "^10.0.0",
     "react": "17.0.1",
