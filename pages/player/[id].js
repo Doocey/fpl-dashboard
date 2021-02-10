@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import Image from 'next/image'
 import Nav from '../../components/Nav'
+import Footer from '../../components/Footer'
 
 export default function PlayerPage(props) {
   const playerData = props.data.player
@@ -39,6 +40,8 @@ export default function PlayerPage(props) {
 
           <code>Total Points: {playerData.total_points}</code>
 
+          <h4>Selected By: <span>{playerData.selected_by_percent}%</span></h4>
+
           {
             playerData.news.length ? <mark className="d-block">🚨 {playerData.news}</mark> : ''
           }
@@ -46,9 +49,7 @@ export default function PlayerPage(props) {
 
       </main>
 
-      <footer>
-        <p>Just some good old footer stuff</p>
-      </footer>
+      <Footer />
 
       <style jsx>{`
         .container {
@@ -222,6 +223,7 @@ export async function getStaticProps({ params }) {
           goals_scored
           now_cost
           total_points
+          selected_by_percent
           web_name
           photo
           news

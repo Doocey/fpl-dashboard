@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-function About() {
+function Nav() {
   return (
     <div className="full-width">
       <nav className="nav kevin">
@@ -8,7 +8,7 @@ function About() {
           <a className="nav-link">Home</a>
         </Link>
 
-        <Link href={'/player/' + Math.floor(Math.random() * 6) + 10}>
+        <Link href={'/player/' + (Math.floor(Math.random() * (649 - 1) + 1))}>
           <a className="nav-link">Random Player Profile</a>
         </Link>
 
@@ -51,4 +51,4 @@ function About() {
   );
 }
 
-export default About;
+export default Nav;
