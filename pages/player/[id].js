@@ -42,6 +42,14 @@ export default function PlayerPage(props) {
 
           <h4>Selected By: <span>{playerData.selected_by_percent}%</span></h4>
 
+          <div className="card">
+            <p>Transfers In:  <strong>{playerData.transfers_in_event}</strong></p>
+
+            <p>Transfers Out: <strong>{playerData.transfers_out_event}</strong></p>
+            <hr />
+            <p>Net Transfers: <span className="net-transfers">{playerData.transfers_in_event - playerData.transfers_out_event}</span></p>
+          </div>
+
           {
             playerData.news.length ? <mark className="d-block">🚨 {playerData.news}</mark> : ''
           }
@@ -187,6 +195,14 @@ export default function PlayerPage(props) {
           padding: 5px;
           border: 1px solid #daeeff;
         }
+
+        .net-transfers {
+          background: aliceblue;
+          padding: 5px 10px;
+          display: inline-block;
+          border-radius: 5px;
+          border: 1px solid #bccbd9
+        }
       `}</style>
 
       <style jsx global>{`
@@ -223,6 +239,8 @@ export async function getStaticProps({ params }) {
           goals_scored
           now_cost
           total_points
+          transfers_in_event
+          transfers_out_event
           selected_by_percent
           web_name
           photo
