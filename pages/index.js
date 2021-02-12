@@ -1,11 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Nav from '../components/Nav'
 
 export default function FantasyLeague(params) {
   return (
     <div className="container">
-      <Nav />
       <Head>
         <title>Fantasy League Data</title>
         <link rel="icon" href="/favicon.ico" />
@@ -30,26 +28,6 @@ export default function FantasyLeague(params) {
             </Link>
           )} 
         </nav>        
-
-        {/* <p className="description">
-          List of all Premier League teams with their FPL <code>ID</code>.
-        </p> */}
-
-          {/* <table>
-            <thead>
-              <td>Teams:</td>
-              <td>ID:</td>
-            </thead>
-            {
-              params.teams.map(x => 
-                <tr>
-                  <td>{ x.name }</td>
-                  <td>{ x.id }</td>
-                </tr>
-              )
-            }              
-          </table> */}
-
       </main>
 
       <footer>
@@ -188,21 +166,6 @@ export default function FantasyLeague(params) {
 
         #p-nav {
           display: block;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
         }
       `}</style>
     </div>
