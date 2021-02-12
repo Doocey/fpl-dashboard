@@ -48,7 +48,7 @@ export default function PlayerPage(props) {
           </div>
 
           {
-            playerData.news.length ? <mark className={styles.d-block}>🚨 {playerData.news}</mark> : ''
+            playerData.news.length ? <mark className={styles.d_block}>🚨 {playerData.news}</mark> : ''
           }
         </div>
 

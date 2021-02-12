@@ -81,3 +81,7 @@
   border-radius: 5px;
   border: 1px solid #bccbd9
 }
+
+.d_block {
+  display: block;
+}
