@@ -25,7 +25,6 @@
   font-size: 1.5rem;
 }
 
-
 .grid {
   display: flex;
   align-items: center;
@@ -79,7 +78,7 @@
   padding: 5px 10px;
   display: inline-block;
   border-radius: 5px;
-  border: 1px solid #bccbd9
+  border: 1px solid #bccbd9;
 }
 
 .d_block {
