@@ -17,7 +17,8 @@ export default function Home(params) {
         </h1>
 
         <p className={styles.description}>
-          A complete list of all currently registered players, with their unique idenifier.
+          A complete list of all currently <em>available</em> players, with their unique idenifier.
+          Anyone not on the list is out on loan, has left the club permanently, or has not made their club's registered squad list.
         </p>
 
         <p>Each tile should route you to a specific player profile - using Next.js' Dynamic Routing.</p>
@@ -38,14 +39,19 @@ export default function Home(params) {
   )
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps() {
+  /**
+   * Grab default FPL data from endpoint
+   * Filter 'elements' item in returned json to include all players
+   * that do not have a status of 'u' - meaning unavailable
+   * Only active players in the FPL will be included and further reduces the size
+   * of data we pass through to component
+   */
   const res = await fetch(`https://www.newcastle360.com/kevin/`)
   const allData = await res.json()
-  const { teams } = allData
-  const players = allData.elements
+  const players = allData.elements.filter(player => !(player.status === 'u')) 
   return {
     props: {
-      teams,
       players
     }
   }

@@ -13,8 +13,6 @@ export default function handler(req, res) {
     'method': 'GET',
     'hostname': 'fantasy.premierleague.com',
     'path': `/api/element-summary/${req.query.id}/`,
-    'headers': {
-    },
     'maxRedirects': 20
   };
   
