@@ -2,7 +2,7 @@ import styles from '../styles/Home.module.css'
 import Head from 'next/head'
 import Link from 'next/link'
 
-export default function Home(params) {
+export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
@@ -24,7 +24,7 @@ export default function Home(params) {
         <p>Each tile should route you to a specific player profile - using Next.js' Dynamic Routing.</p>
 
         <nav className={styles.grid}>
-          {params.players.map((player) =>
+          {props.players.map((player) =>
             <Link href={'/player/' + (player.id).toString()} key={(player.id).toString()}>
               <a className={styles.card}>{player.web_name} - {player.id}</a>
             </Link>

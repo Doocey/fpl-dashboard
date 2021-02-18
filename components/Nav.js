@@ -12,7 +12,7 @@ function Nav() {
           <a className="nav-link">Random Player Profile</a>
         </Link>
 
-        <Link href="/player/">
+        <Link href="/price-changes">
           <a className="nav-link">Price Changes <i><small>(Coming Soon)</small></i></a>
         </Link>
       </nav>

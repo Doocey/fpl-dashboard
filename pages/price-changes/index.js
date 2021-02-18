@@ -1,66 +1,50 @@
 // import styles from '../styles/Prices.module.css'
+import Link from 'next/link'
 
 export default function Prices(props) {
-    const priceRisers = [];
-    const priceFallers = [];
 
-    props.players.forEach(player => {
-        if (player.cost_change_event > 0) {
-            priceRisers.push(
-                {
-                    name: player.web_name,
-                    price: player.now_cost,
-                    sbp: player.selected_by_percent
-                }
-            )
-        } else {
-            priceFallers.push(
-                {
-                    name: player.web_name,
-                    price: player.now_cost,
-                    sbp: player.selected_by_percent
-                }
-            )
-        }
-    }
-    )
+    // Destructure priceRisers + priceFallers from passed props
+    const { priceRisers, priceFallers } = props
 
-    console.log('Risers: ' + priceFallers)
-    console.log('Fallers: ' + priceFallers)
     return (
         <section>
-            <strong>RISER:</strong>
-            <tr>
-                <td><strong>Player:</strong></td>
-                <td><strong>Price:</strong></td>
-                <td><strong>Selected By (%):</strong></td>
-            </tr>
-            {
-                priceRisers.map(x =>
+            <table style={{background: "seagreen"}}>
+                <thead>
+                    <th>Player</th>
+                    <th>Price</th>
+                </thead>
+                <tbody>
+                {priceRisers.map(player => 
                     <tr>
-                        <td>{x.name}</td>
-                        <td>£{(x.price / 10).toFixed(1)}m</td>
-                        <td>{x.sbp}%</td>
+                        <td>
+                            <Link href={`/player/${player.id}`}>
+                                <a>{player.name}</a>
+                            </Link>
+                        </td>
+                        <td>£{(player.price / 10).toFixed(1)}m</td>
                     </tr>
-                )
-            }
-            <hr />
-            <strong>FALLER:</strong>
-            <table>
-                <tr>
-                    <td><strong>Player:</strong></td>
-                    <td><strong>Price:</strong></td>
-                    <td><strong>Selected By (%):</strong></td>
-                </tr>
-                {
-                    priceFallers.map(x =>
-                        <tr>
-                            <td>{x.name}</td>
-                            <td>£{(x.price / 10).toFixed(1)}m</td>
-                            <td>{x.sbp}%</td>
-                        </tr>
-                    )
-                }
+                )}
+                </tbody>
+            </table>
+
+            <hr/>
+            <table style={{background: "red"}}>
+                <thead>
+                    <th>Player</th>
+                    <th>Price</th>
+                </thead>
+                <tbody>
+                {priceFallers.map(player => 
+                    <tr>
+                        <td>
+                            <Link href={`/player/${player.id}`}>
+                                <a>{player.name}</a>
+                            </Link>
+                        </td>
+                        <td>£{(player.price / 10).toFixed(1)}m</td>
+                    </tr>
+                )}
+                </tbody>
             </table>
         </section>
     )
@@ -74,9 +58,35 @@ export async function getStaticProps() {
         !(player.cost_change_event === 0)
     )
 
+    const priceRisers = [];
+    const priceFallers = [];
+
+    players.forEach(player => {
+        if (player.cost_change_event > 0) {
+            priceRisers.push(
+                {
+                    name: player.web_name,
+                    price: player.now_cost,
+                    sbp: player.selected_by_percent,
+                    id: player.id
+                }
+            )
+        } else {
+            priceFallers.push(
+                {
+                    name: player.web_name,
+                    price: player.now_cost,
+                    sbp: player.selected_by_percent,
+                    id: player.id
+                }
+            )
+        }
+    })
+
     return {
         props: {
-            players
+            priceRisers,
+            priceFallers
         }
     }
 }
