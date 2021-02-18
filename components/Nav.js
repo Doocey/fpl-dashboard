@@ -3,7 +3,7 @@ import Link from "next/link";
 function Nav() {
   return (
     <div className="full-width">
-      <nav className="nav kevin">
+      <nav className="nav">
         <Link href="/">
           <a className="nav-link">Home</a>
         </Link>

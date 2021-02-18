@@ -1,17 +1,25 @@
 // import styles from '../styles/Prices.module.css'
+import Head from 'next/head'
 import Link from 'next/link'
 
 export default function Prices(props) {
-
     // Destructure priceRisers + priceFallers from passed props
     const { priceRisers, priceFallers } = props
-
+    const meta_description = 'Recent price risers/fallers in Fantasy Premier League.'
     return (
-        <section>
-            <table style={{background: "seagreen"}}>
-                <thead>
+        <section className="container">
+            <Head>
+                <title>Fantasy Premier League Price Risers/Fallers</title>
+                <link rel="icon" href="/favicon.ico" />
+                <meta name="description" content={meta_description}/>
+            </Head>      
+
+            <h2>Risers:</h2>      
+            <table style={{background: "seagreen", width: "400px", padding: "20px", color: "white"}}>
+                <thead style={{textAlign: "left"}}>
                     <th>Player</th>
                     <th>Price</th>
+                    <th style={{textAlign: "right"}}>Selected By: (%)</th>
                 </thead>
                 <tbody>
                 {priceRisers.map(player => 
@@ -22,16 +30,18 @@ export default function Prices(props) {
                             </Link>
                         </td>
                         <td>£{(player.price / 10).toFixed(1)}m</td>
+                        <td style={{textAlign: "center"}}>{player.sbp}%</td>
                     </tr>
                 )}
                 </tbody>
             </table>
 
-            <hr/>
-            <table style={{background: "red"}}>
-                <thead>
+            <h2>Fallers:</h2>   
+            <table style={{background: "tomato", width: "400px", padding: "20px"}}>
+                <thead style={{textAlign: "left"}}>
                     <th>Player</th>
                     <th>Price</th>
+                    <th style={{textAlign: "right"}}>Selected By: (%)</th>
                 </thead>
                 <tbody>
                 {priceFallers.map(player => 
@@ -42,6 +52,7 @@ export default function Prices(props) {
                             </Link>
                         </td>
                         <td>£{(player.price / 10).toFixed(1)}m</td>
+                        <td style={{textAlign: "center"}}>{player.sbp}%</td>
                     </tr>
                 )}
                 </tbody>
@@ -58,8 +69,13 @@ export async function getStaticProps() {
         !(player.cost_change_event === 0)
     )
 
-    const priceRisers = [];
-    const priceFallers = [];
+    /**
+     * Split players by price rise / drop
+     * Can we do this in a nicer fashion?..
+     */
+    
+    let priceRisers = [];
+    let priceFallers = [];
 
     players.forEach(player => {
         if (player.cost_change_event > 0) {
@@ -87,6 +103,7 @@ export async function getStaticProps() {
         props: {
             priceRisers,
             priceFallers
-        }
+        },
+        revalidate: 10
     }
 }
