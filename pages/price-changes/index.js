@@ -25,7 +25,7 @@ export default function Prices(props) {
                 {priceRisers.map(player => 
                     <tr>
                         <td>
-                            <Link href={`/player/${player.id}`}>
+                            <Link href={`/player/${player.id}`} key={`riser-${player.id}`}>
                                 <a>{player.name}</a>
                             </Link>
                         </td>
@@ -47,7 +47,7 @@ export default function Prices(props) {
                 {priceFallers.map(player => 
                     <tr>
                         <td>
-                            <Link href={`/player/${player.id}`}>
+                            <Link href={`/player/${player.id}`} key={`faller-${player.id}`}>
                                 <a>{player.name}</a>
                             </Link>
                         </td>
