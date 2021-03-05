@@ -1,7 +1,14 @@
+/**
+ * Grab latest player price prices from our DB & send back to client as JSON
+ * Accesible via `/api/changes/` - returns list of 7 items from stored changes DB collection
+*/
 import { getPriceChanges } from '../../../util/getPriceChanges'
 
 export default async (req, res) => {
-    // Grab latest player prices from official FPL API
-    const price_changes = await getPriceChanges();
-    res.status(200).json(price_changes)
+    try {
+        const price_changes = await getPriceChanges();
+        res.status(200).json(price_changes)
+    } catch (error) {
+        res.status(404).json({found: 'Nothing at all!'})
+    }
 };

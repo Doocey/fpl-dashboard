@@ -14,14 +14,16 @@ var config = {
 // Run Axios to go out and fetch out data, and return a subset of it
 export async function getLivePlayerPrices() {
     try {
-        const players = await axios(config).then(function (rsp) {
-          return rsp.data.elements
-        })
-        .catch(function (error) {
-          console.log(error);
-        }); 
+        const players = await axios(config)
+          .then(function (rsp) {
+            return rsp.data.elements
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
         return players    
     } catch (error) {
-        console.log('Something went wrong: ' + error)
+      console.log('Something went wrong: ' + error)
     }
 }

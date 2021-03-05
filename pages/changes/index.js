@@ -1,32 +1,70 @@
-import { responsePathAsArray } from 'graphql';
 import Head from 'next/head'
+import Link from 'next/link'
 import { getPriceChanges } from '../../util/getPriceChanges'
 
-export default function Home({ prices } = props) {
-  const price_changers = JSON.parse(prices)
-  console.log(price_changers)
+export default function Home({ prices }) {
+  const price_changes_week = JSON.parse(prices)
+  // price_changers.forEach(element => {
+  //   console.log(element)
+  // });
+
   return (
-    <div className="container">
+    <section className="container">
       <Head>
         <title>Fantasy Premier League Price Changes - Updated Prices for the players you love!</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <h1>Number of days on record: {price_changers.length}</h1>
+        <h1 style={{fontSize: '40px'}}>Number of days on record: <span style={{color: 'seagreen'}}>{price_changes_week.length}</span></h1>
+        {/* <code>{JSON.stringify(price_changes_week)}</code> */}
+        
+        {
+        /* TODO: Lets inline the styling for now, and create css.mod later */
+        price_changes_week.map((pc) => 
+          <table style={{width: '100%', marginBottom: '20px'}}>
+            <tr style={{background: 'gainsboro'}}>
+              <th style={{padding: '15px'}}>{new Date(pc._id).toDateString()}</th>
+            </tr>
+            <tr style={{background: 'tomato', color: 'white'}}>
+              {
+              pc.fallers ?
+                pc.fallers.map((x) => 
+                <td style={{padding: '10px 20px'}}>
+                  <Link href={`/player/${x.id}`} key={`faller-${x.id}`}>
+                    <a>{x.first_name} {x.second_name}</a>
+                  </Link> - £{(x.new_price / 10).toFixed(1)}m - {x.percentage_ownership}%</td>) 
+                : ''}           
+            </tr>
+            <tr style={{display: 'block', background: 'seagreen', color: 'white'}}>
+              {
+              pc.risers 
+                ? pc.risers.map((x) => 
+                <td style={{padding: '10px 20px'}}>
+                  <Link href={`/player/${x.id}`} key={`riser-${x.id}`}>
+                    <a>{x.first_name} {x.second_name}</a>
+                  </Link> - £{(x.new_price / 10).toFixed(1)}m - {x.percentage_ownership}%</td>) 
+                : ''
+              }   
+            </tr>
+          </table>
+        )
+        }
+        
       </main>
-    </div>
+    </section>
   )
 }
 
-export async function getStaticProps(context) {
-  const prices = await getPriceChanges()
-  
-  const result =  JSON.stringify(prices)
+export async function getStaticProps() {
+  // Grab our price changes, if there any & strinify to avoid date object issues when passing props
+  const data = await getPriceChanges()
+  const prices = JSON.stringify(data)
   
   return {
     props: {
-      prices: result
-    }
+      prices: prices
+    },
+    revalidate: 30
   }
 }

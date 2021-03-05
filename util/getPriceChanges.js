@@ -96,10 +96,8 @@ export async function getPriceChanges() {
 
             await db.collection(MONGODB_PRICE_CHANGES_COLLECTION).insertOne({
                 _id: new Date(),
-                changers: {
-                    fallers: fallers, 
-                    risers: risers
-                }
+                fallers: fallers, 
+                risers: risers
             })
         } else {
             console.log('No new price rises....seemingly!')
@@ -117,6 +115,7 @@ export async function getPriceChanges() {
     const daily_changes = await db.collection(MONGODB_PRICE_CHANGES_COLLECTION)
         .find({})
         .limit(7)
+        .sort({_id: -1})
         .toArray()
     // Send JSON response back (which will be database value of players with changed price)    
     return daily_changes
