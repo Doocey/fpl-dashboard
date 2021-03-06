@@ -26,27 +26,32 @@ export default function Home({ prices }) {
             <tr style={{background: 'gainsboro'}}>
               <th style={{padding: '15px'}}>{new Date(pc._id).toDateString()}</th>
             </tr>
-            <tr style={{background: 'tomato', color: 'white'}}>
-              {
-              pc.fallers ?
-                pc.fallers.map((x) => 
-                <td style={{padding: '10px 20px'}}>
-                  <Link href={`/player/${x.id}`} key={`faller-${x.id}`}>
-                    <a>{x.first_name} {x.second_name}</a>
-                  </Link> - £{(x.new_price / 10).toFixed(1)}m - {x.percentage_ownership}%</td>) 
-                : ''}           
-            </tr>
-            <tr style={{display: 'block', background: 'seagreen', color: 'white'}}>
-              {
+            {
               pc.risers 
                 ? pc.risers.map((x) => 
-                <td style={{padding: '10px 20px'}}>
-                  <Link href={`/player/${x.id}`} key={`riser-${x.id}`}>
-                    <a>{x.first_name} {x.second_name}</a>
-                  </Link> - £{(x.new_price / 10).toFixed(1)}m - {x.percentage_ownership}%</td>) 
+                <tr style={{display: 'block', background: 'seagreen', color: 'white', marginBottom: '1px'}}>
+                  <td style={{padding: '10px 20px'}}>
+                    <Link href={`/player/${x.id}`} key={`riser-${x.id}`}>
+                      <a>{x.first_name} {x.second_name}</a>
+                    </Link> - £{(x.new_price / 10).toFixed(1)}m - {x.percentage_ownership}%
+                  </td>
+                </tr>
+                  ) 
                 : ''
-              }   
-            </tr>
+            }
+            {
+              pc.fallers 
+                ? pc.fallers.map((x) => 
+                <tr style={{display: 'block', background: 'firebrick', color: 'white', marginBottom: '1px'}}>
+                  <td style={{padding: '10px 20px'}}>
+                    <Link href={`/player/${x.id}`} key={`riser-${x.id}`}>
+                      <a>{x.first_name} {x.second_name}</a>
+                    </Link> - £{(x.new_price / 10).toFixed(1)}m - {x.percentage_ownership}%
+                  </td>
+                </tr>
+                  ) 
+                : ''
+              }
           </table>
         )
         }
