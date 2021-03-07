@@ -2,6 +2,7 @@ import styles from '../../styles/Player.module.css'
 import Head from 'next/head'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import Image from 'next/image'
+import { getLivePlayerPrices } from '../../util/getLivePlayerPrices'
 
 // Extract player object from data in 'props
 export default function Player({ data: { player } }) {
@@ -98,10 +99,8 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   // Call an external API endpoint to get posts
-  const res = await fetch('https://www.newcastle360.com/kevin/')
-  const allData = await res.json()
-  const players = allData.elements
-
+  const players = await getLivePlayerPrices()
+  
   // Get the paths we want to pre-render based on posts
   const paths = players.map((player) => ({
     params: { id: player.id.toString() },
