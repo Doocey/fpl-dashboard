@@ -13,7 +13,7 @@ function Nav() {
         </Link>
 
         <Link href="/price-changes">
-          <a className="nav-link">Price Changes <i><small>(Coming Soon)</small></i></a>
+          <a className="nav-link">Price Changes</a>
         </Link>
       </nav>
     </div>

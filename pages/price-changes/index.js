@@ -19,20 +19,22 @@ export default function Home({ prices }) {
         {
         /* TODO: Lets inline the styling for now, and create css.mod later */
         price_changes_week.map((pc) => 
+          <>
+          <h2>{new Date(pc._id).toDateString()}</h2>
           <table style={{width: '100%', marginBottom: '20px'}}>
             <thead style={{background: 'gainsboro'}}>
-              <tr>
-                <th style={{padding: '10px 20px'}}>Price Changes:</th>
-                <th>New Price:</th>
-                <th>Owned By: (%)</th>
+              <tr style={{textAlign: 'left'}}>
+                <th style={{padding: '10px 20px'}}>Player:</th>
+                <th style={{padding: '10px 20px'}}>New Price:</th>
+                <th style={{padding: '10px 20px'}}>Owned By: (%)</th>
               </tr>
             </thead>
             {
               pc.risers ? pc.risers.map((x) => 
-                <tr style={{background: 'seagreen', color: 'white', marginBottom: '1px'}}>
+                <tr style={{background: 'seagreen', color: 'white'}}>
                   <td style={{padding: '10px 20px'}}>
                     <Link href={`/player/${x.id}`} key={`riser-${x.id}`}>
-                      <a>{x.first_name} {x.second_name}</a>
+                      <a>{x.short_name}</a>
                     </Link>
                   </td>
                   <td style={{padding: '10px 20px'}}>
@@ -50,7 +52,7 @@ export default function Home({ prices }) {
                 <tr style={{background: 'firebrick', color: 'white', marginBottom: '1px'}}>
                   <td style={{padding: '10px 20px'}}>
                     <Link href={`/player/${x.id}`} key={`riser-${x.id}`}>
-                      <a>{x.first_name} {x.second_name}</a>
+                      <a>{x.short_name}</a>
                     </Link>
                   </td>
                   <td style={{padding: '10px 20px'}}>
@@ -64,6 +66,7 @@ export default function Home({ prices }) {
                 : ''
               }
           </table>
+          </>
         )
         }
         

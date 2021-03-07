@@ -23,7 +23,7 @@ export default function Home(props) {
 
         <p>Each tile should route you to a specific player profile - using Next.js' Dynamic Routing.</p>
 
-        <nav className={styles.grid}>
+        <nav className={styles.grid} style={{borderBottom: '0'}}>
           {props.players.map((player) =>
             <Link href={'/player/' + (player.id).toString()} key={(player.id).toString()}>
               <a className={styles.card}>{player.web_name} - {player.id}</a>
@@ -31,10 +31,6 @@ export default function Home(props) {
           )} 
         </nav>        
       </main>
-
-      <footer>
-        <p>Just some good old footer stuff</p>
-      </footer>
     </div>
   )
 }
