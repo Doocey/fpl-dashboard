@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.css'
 import Head from 'next/head'
 import Link from 'next/link'
+import { getLivePlayerPrices } from '../util/getLivePlayerPrices'
 
 export default function Home(props) {
   return (
@@ -38,14 +39,14 @@ export default function Home(props) {
 export async function getStaticProps() {
   /**
    * Grab default FPL data from endpoint
-   * Filter 'elements' item in returned json to include all players
+   * Filter returned json to include all players
    * that do not have a status of 'u' - meaning unavailable
    * Only active players in the FPL will be included and further reduces the size
    * of data we pass through to component
    */
-  const res = await fetch(`https://www.newcastle360.com/kevin/`)
-  const allData = await res.json()
-  const players = allData.elements.filter(player => !(player.status === 'u')) 
+  
+  const res = await getLivePlayerPrices()
+  const players = res.filter(player => !(player.status === 'u')) 
   return {
     props: {
       players
