@@ -4,13 +4,14 @@ import styles from '../../styles/PriceChanges.module.css'
 import { getPriceChanges } from '../../util/getPriceChanges'
 
 export default function PriceChanges({ prices }) {
+  // Parse our list of price changes for the week, since it's coming through as a <string>
   const price_changes_week = JSON.parse(prices)
 
   return (
     <section className="container">
       <Head>
-        <title>Fantasy Premier League Price Changes - Updated Prices for the players you love!</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Fantasy Premier League Price Changes</title>
+        <meta name="description" content="Daily Fantasy Premier League price changes for the game we love to hate"/>
       </Head>
 
       <main>
