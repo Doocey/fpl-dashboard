@@ -25,8 +25,8 @@ export async function getPriceChanges() {
 
     async function comparePrices(live_pp, database_pp) {
 
-        console.log('Database Size: ' + database_pp.length)
-        console.log('Live Size: ' + live_pp.length)
+        // console.log('Database Size: ' + database_pp.length)
+        // console.log('Live Size: ' + live_pp.length)
 
         // Track Price Changes of Risers & Fallers
         let risers = []
@@ -44,7 +44,7 @@ export async function getPriceChanges() {
             for await (const db_player of db_prices) {
 
                 if(player.now_cost > db_player.price) {
-                    console.log("We have a riser!", player.web_name)
+                    // console.log("We have a riser!", player.web_name)
                     risers.push({
                         id: player.id,
                         first_name: player.first_name,
@@ -63,7 +63,7 @@ export async function getPriceChanges() {
                     )
 
                 } else if(player.now_cost < db_player.price) {
-                    console.log("We have a faller!", player.web_name)
+                    // console.log("We have a faller!", player.web_name)
                     fallers.push({
                         id: player.id,
                         first_name: player.first_name,
