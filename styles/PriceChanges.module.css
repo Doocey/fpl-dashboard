@@ -36,3 +36,11 @@
 .h1 span {
   color: seagreen;
 }
+
+.table_container {
+  width: 100%;
+}
+
+.table_container h2 {
+  text-align: center;
+}

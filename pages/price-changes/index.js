@@ -4,13 +4,14 @@ import styles from '../../styles/PriceChanges.module.css'
 import { getPriceChanges } from '../../util/getPriceChanges'
 
 export default function PriceChanges({ prices }) {
+  // Parse our list of price changes for the week, since it's coming through as a <string>
   const price_changes_week = JSON.parse(prices)
 
   return (
     <section className="container">
       <Head>
-        <title>Fantasy Premier League Price Changes - Updated Prices for the players you love!</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Fantasy Premier League Price Changes</title>
+        <meta name="description" content="Daily Fantasy Premier League price changes for the game we love to hate"/>
       </Head>
 
       <main>
@@ -18,7 +19,7 @@ export default function PriceChanges({ prices }) {
         
         {
         price_changes_week.map((pc) => 
-          <>
+          <section className={styles.table_container} key={pc._id}>
           <h2>{new Date(pc._id).toDateString()}</h2>
           <table className={styles.table}>
             <thead>
@@ -28,44 +29,46 @@ export default function PriceChanges({ prices }) {
                 <th>Owned By: (%)</th>
               </tr>
             </thead>
-            {
-              pc.risers ? pc.risers.map((p) => 
-                <tr className={styles.risers}>
-                  <td>
-                    <Link href={`/player/${p.id}`} key={`riser-${p.id}`}>
-                      <a>{p.short_name}</a>
-                    </Link>
-                  </td>
-                  <td>
-                    £{(p.new_price / 10).toFixed(1)}m
-                  </td>
-                  <td>
-                    {p.percentage_ownership}%
-                  </td>
-                </tr>
-                  ) 
-                : ''
-            }
-            {
-              pc.fallers ? pc.fallers.map((p) => 
-                <tr className={styles.fallers}>
-                  <td>
-                    <Link href={`/player/${p.id}`} key={`faller-${p.id}`}>
-                      <a>{p.short_name}</a>
-                    </Link>
-                  </td>
-                  <td>
-                    £{(p.new_price / 10).toFixed(1)}m
-                  </td>
-                  <td>
-                    {p.percentage_ownership}%
-                  </td>
-                </tr>
-                  ) 
-                : ''
+            <tbody>
+              {
+                pc.risers ? pc.risers.map((p) => 
+                  <tr className={styles.risers} key={`riser-${p.id}`}>
+                    <td>
+                      <Link href={`/player/${p.id}`}>
+                        <a>{p.short_name}</a>
+                      </Link>
+                    </td>
+                    <td>
+                      £{(p.new_price / 10).toFixed(1)}m
+                    </td>
+                    <td>
+                      {p.percentage_ownership}%
+                    </td>
+                  </tr>
+                    ) 
+                  : ''
               }
+              {
+                pc.fallers ? pc.fallers.map((p) => 
+                  <tr className={styles.fallers} key={`faller-${p.id}`}>
+                    <td>
+                      <Link href={`/player/${p.id}`}>
+                        <a>{p.short_name}</a>
+                      </Link>
+                    </td>
+                    <td>
+                      £{(p.new_price / 10).toFixed(1)}m
+                    </td>
+                    <td>
+                      {p.percentage_ownership}%
+                    </td>
+                  </tr>
+                    ) 
+                  : ''
+                }
+            </tbody>
           </table>
-          </>
+          </section>
         )
         }
         
@@ -81,8 +84,7 @@ export async function getStaticProps() {
   
   return {
     props: {
-      prices: prices
-    },
-    revalidate: 30
+      prices
+    }
   }
 }
