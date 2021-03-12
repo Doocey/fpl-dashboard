@@ -2,6 +2,7 @@
  * 1. Grabs recent price changers from MongoDB Collection
  * 2. Loops through and composes Tweet string to be sent only if there are either risers/fallers
  * 3. trycatch attempts tweeting out the string, otherwise catches error
+ * TODO: Can I clean this up futher and optimize the execution?
  */
 
 import { TwitterClient } from 'twitter-api-client'
@@ -17,7 +18,7 @@ const twitterClient = new TwitterClient({
 })
 
 export async function tweetPriceChanges() {
-
+  try {
     var tweet_string_fallers = ''
     var tweet_string_risers = ''
 
@@ -27,7 +28,7 @@ export async function tweetPriceChanges() {
         .limit(1)
         .sort({_id: -1})
         .toArray()
-  
+
     daily_changes.forEach(dc => {
       dc.fallers 
         ? dc.fallers.forEach(fl => tweet_string_fallers += `\n${fl.short_name} - £${(fl.new_price / 10).toFixed(1)}m 🔻`)
@@ -39,20 +40,20 @@ export async function tweetPriceChanges() {
 
     if(tweet_string_fallers.length > 0) {
       tweet_string_fallers = 'Price Fallers: \n' + tweet_string_fallers + '\n\n#FPLPriceChanges'
-      console.log(tweet_string_fallers)
     }
 
     if(tweet_string_risers.length > 0) {
       tweet_string_risers = 'Price Risers: \n' + tweet_string_risers + '\n\n#FPLPriceChanges'
-      console.log(tweet_string_risers)
     }
+  
+    // Send off Price Risers & Fallers, if there's any of them!
+
+    /** TODO: Can I optimize this code to be more efficient? */
+    const tweetedFallers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_fallers });
+    const tweetedRisers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_risers });
     
-    try {
-      // Send off Price Risers & Fallers, if there's any of them!
-      const tweetedFallers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_fallers });
-      const tweetedRisers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_risers });
-      return [tweetedFallers, tweetedRisers]
-    } catch (error) {
-      console.log(error.data)
-    }
+    return [tweetedFallers, tweetedRisers]
+  } catch (error) {
+    return error
+  }
 }

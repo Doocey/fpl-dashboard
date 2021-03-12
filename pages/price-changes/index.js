@@ -19,7 +19,7 @@ export default function PriceChanges({ prices }) {
         
         {
         price_changes_week.map((pc) => 
-          <>
+          <section className={styles.table_container} key={pc._id}>
           <h2>{new Date(pc._id).toDateString()}</h2>
           <table className={styles.table}>
             <thead>
@@ -29,44 +29,46 @@ export default function PriceChanges({ prices }) {
                 <th>Owned By: (%)</th>
               </tr>
             </thead>
-            {
-              pc.risers ? pc.risers.map((p) => 
-                <tr className={styles.risers}>
-                  <td>
-                    <Link href={`/player/${p.id}`} key={`riser-${p.id}`}>
-                      <a>{p.short_name}</a>
-                    </Link>
-                  </td>
-                  <td>
-                    £{(p.new_price / 10).toFixed(1)}m
-                  </td>
-                  <td>
-                    {p.percentage_ownership}%
-                  </td>
-                </tr>
-                  ) 
-                : ''
-            }
-            {
-              pc.fallers ? pc.fallers.map((p) => 
-                <tr className={styles.fallers}>
-                  <td>
-                    <Link href={`/player/${p.id}`} key={`faller-${p.id}`}>
-                      <a>{p.short_name}</a>
-                    </Link>
-                  </td>
-                  <td>
-                    £{(p.new_price / 10).toFixed(1)}m
-                  </td>
-                  <td>
-                    {p.percentage_ownership}%
-                  </td>
-                </tr>
-                  ) 
-                : ''
+            <tbody>
+              {
+                pc.risers ? pc.risers.map((p) => 
+                  <tr className={styles.risers} key={`riser-${p.id}`}>
+                    <td>
+                      <Link href={`/player/${p.id}`}>
+                        <a>{p.short_name}</a>
+                      </Link>
+                    </td>
+                    <td>
+                      £{(p.new_price / 10).toFixed(1)}m
+                    </td>
+                    <td>
+                      {p.percentage_ownership}%
+                    </td>
+                  </tr>
+                    ) 
+                  : ''
               }
+              {
+                pc.fallers ? pc.fallers.map((p) => 
+                  <tr className={styles.fallers} key={`faller-${p.id}`}>
+                    <td>
+                      <Link href={`/player/${p.id}`}>
+                        <a>{p.short_name}</a>
+                      </Link>
+                    </td>
+                    <td>
+                      £{(p.new_price / 10).toFixed(1)}m
+                    </td>
+                    <td>
+                      {p.percentage_ownership}%
+                    </td>
+                  </tr>
+                    ) 
+                  : ''
+                }
+            </tbody>
           </table>
-          </>
+          </section>
         )
         }
         
@@ -82,8 +84,7 @@ export async function getStaticProps() {
   
   return {
     props: {
-      prices: prices
-    },
-    revalidate: 30
+      prices
+    }
   }
 }

@@ -7,7 +7,7 @@ export async function getPriceChanges() {
     // Grab latest player prices from official FPL API
     const live_pp = await getLivePlayerPrices()
     // Grab stored DB player prices
-    const database_pp = await getDatabasePrices()
+    // const database_pp = await getDatabasePrices()
     // db connection
     const { db } = await connectToDatabase();
     
@@ -23,7 +23,7 @@ export async function getPriceChanges() {
      * TODO: Can I clean this up to have it more streamlined? Introduce caching?
      */
 
-    async function comparePrices(live_pp, database_pp) {
+    async function comparePrices(live_pp) {
 
         // console.log('Database Size: ' + database_pp.length)
         // console.log('Live Size: ' + live_pp.length)
@@ -90,9 +90,9 @@ export async function getPriceChanges() {
          */
         if(risers.length > 0 || fallers.length > 0){
             // Risers
-            console.table(risers)
+            // console.table(risers)
             // Fallers
-            console.table(fallers)
+            // console.table(fallers)
 
             await db.collection(MONGODB_PRICE_CHANGES_COLLECTION).insertOne({
                 _id: new Date(),
@@ -105,7 +105,7 @@ export async function getPriceChanges() {
     }
 
     // Run the Async function to carry out the checking, updating, and sending back to API
-    await comparePrices(live_pp, database_pp)
+    await comparePrices(live_pp)
 
     /**
      * Pull the recently updated list of daily changes from DB
