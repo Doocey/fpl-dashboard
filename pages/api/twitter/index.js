@@ -1,7 +1,8 @@
 /**
- * Grab latest player price prices from our DB & send back to client as JSON
- * Accesible via `/api/changes/` - returns list of 7 items from stored changes DB collection
+ * Endpoint to hit to tweet out price changes, if there are any.
+ * Hit by cron job to automate it
 */
+
 import { tweetPriceChanges } from '../../../util/postPriceChangeTweet'
 
 export default async (req, res) => {
@@ -9,6 +10,6 @@ export default async (req, res) => {
     try {
         res.status(200).send('Tweet Attempted')
     } catch (error) {
-        res.status(404).json({found: 'Nothing at all!'})
+        res.status(404).json({ found: 'Nothing at all!' })
     }
 };

@@ -8,7 +8,7 @@ function Nav() {
           <a className="nav-link">Home</a>
         </Link>
 
-        <Link href={'/player/' + (Math.floor(Math.random() * (649 - 1) + 1))}>
+        <Link href={`/player/${Math.floor(Math.random() * (649 - 1) + 1)}`}>
           <a className="nav-link">Random Player Profile</a>
         </Link>
 
