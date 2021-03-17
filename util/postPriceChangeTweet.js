@@ -31,19 +31,26 @@ export async function tweetPriceChanges() {
 
     daily_changes.forEach(dc => {
       dc.fallers 
-        ? dc.fallers.forEach(fl => tweet_string_fallers += `\n${fl.short_name} - £${(fl.new_price / 10).toFixed(1)}m 🔻`)
+        ? dc.fallers
+          .sort((a, b) => a.new_price < b.new_price)
+          .forEach(fl => tweet_string_fallers += `\n${fl.short_name} - £${(fl.new_price / 10).toFixed(1)}m 🔻`)
         : ''
       dc.risers 
-        ? dc.risers.forEach(fl => tweet_string_risers += `\n${fl.short_name} - £${(fl.new_price / 10).toFixed(1)}m 💚`)
+        ? dc.risers
+          .sort((a, b) => a.new_price < b.new_price)
+          .forEach(fl => tweet_string_risers += `\n${fl.short_name} - £${(fl.new_price / 10).toFixed(1)}m 💚`)
         : ''
     })
 
+
     if(tweet_string_fallers.length > 0) {
       tweet_string_fallers = 'Price Fallers: \n' + tweet_string_fallers + '\n\n#FPLPriceChanges'
+      console.log(tweet_string_fallers)
     }
 
     if(tweet_string_risers.length > 0) {
       tweet_string_risers = 'Price Risers: \n' + tweet_string_risers + '\n\n#FPLPriceChanges'
+      console.log(tweet_string_risers)
     }
   
     // Send off Price Risers & Fallers, if there's any of them!
