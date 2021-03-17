@@ -15,7 +15,7 @@ export default function Player({ data: { player } }) {
       <Head>
         <title>{player.web_name}</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content={meta_description}/>
+        <meta name="description" content={meta_description} />
         <meta property="og:image" content={player_image} />
       </Head>
 
@@ -88,7 +88,7 @@ export async function getStaticProps({ params }) {
       }    
     `
   });
-  
+
   return {
     props: {
       data
@@ -100,7 +100,7 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
   // Call an external API endpoint to get posts
   const players = await getLivePlayerPrices()
-  
+
   // Get the paths we want to pre-render based on posts
   const paths = players.map((player) => ({
     params: { id: player.id.toString() },

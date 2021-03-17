@@ -1,7 +1,7 @@
 import { connectToDatabase } from './mongodb'
 import { getLivePlayerPrices } from './getLivePlayerPrices'
 import { getDatabasePrices } from './getDatabasePrices'
-const { MONGODB_PRICE_CHANGES_COLLECTION, MONGODB_PRICE_COLLECTION } = process.env; 
+const { MONGODB_PRICE_CHANGES_COLLECTION, MONGODB_PRICE_COLLECTION } = process.env;
 
 export async function getPriceChanges() {
     // Grab latest player prices from official FPL API
@@ -10,7 +10,7 @@ export async function getPriceChanges() {
     // const database_pp = await getDatabasePrices()
     // db connection
     const { db } = await connectToDatabase();
-    
+
     /**
      * comparePrices() will be sent the latest official API prices and our stored DB prices.
      * We filter the live prices to only of those who 
@@ -39,11 +39,11 @@ export async function getPriceChanges() {
         // Loop over them & check against our DB
         for (const player of players_with_changes) {
 
-            const db_prices = await db.collection(MONGODB_PRICE_COLLECTION).find({_id: player.id})
+            const db_prices = await db.collection(MONGODB_PRICE_COLLECTION).find({ _id: player.id })
 
             for await (const db_player of db_prices) {
 
-                if(player.now_cost > db_player.price) {
+                if (player.now_cost > db_player.price) {
                     // console.log("We have a riser!", player.web_name)
                     risers.push({
                         id: player.id,
@@ -58,11 +58,11 @@ export async function getPriceChanges() {
 
                     // Update our own player DB with new price
                     await db.collection(MONGODB_PRICE_COLLECTION).updateOne(
-                        { _id: player.id }, 
+                        { _id: player.id },
                         { $set: { price: player.now_cost } }
                     )
 
-                } else if(player.now_cost < db_player.price) {
+                } else if (player.now_cost < db_player.price) {
                     // console.log("We have a faller!", player.web_name)
                     fallers.push({
                         id: player.id,
@@ -76,8 +76,8 @@ export async function getPriceChanges() {
                     })
                     // Update our own player DB with new price
                     await db.collection(MONGODB_PRICE_COLLECTION).updateOne(
-                        { _id: player.id }, 
-                        { $set: { price: player.now_cost} }
+                        { _id: player.id },
+                        { $set: { price: player.now_cost } }
                     )
                 }
             }
@@ -88,7 +88,7 @@ export async function getPriceChanges() {
          * Insert two arrays, of the price rises, and falls
          * into our daily_changes collection with the _id as the date for later parsing
          */
-        if(risers.length > 0 || fallers.length > 0){
+        if (risers.length > 0 || fallers.length > 0) {
             // Risers
             // console.table(risers)
             // Fallers
@@ -96,7 +96,7 @@ export async function getPriceChanges() {
 
             await db.collection(MONGODB_PRICE_CHANGES_COLLECTION).insertOne({
                 _id: new Date(),
-                fallers: fallers, 
+                fallers: fallers,
                 risers: risers
             })
         } else {
@@ -111,11 +111,11 @@ export async function getPriceChanges() {
      * Pull the recently updated list of daily changes from DB
      * Then send it back to our res object for display by API endpoint
      */
-    
+
     const daily_changes = await db.collection(MONGODB_PRICE_CHANGES_COLLECTION)
         .find({})
         .limit(7)
-        .sort({_id: -1})
+        .sort({ _id: -1 })
         .toArray()
     // Send JSON response back (which will be database value of players with changed price)    
     return daily_changes
