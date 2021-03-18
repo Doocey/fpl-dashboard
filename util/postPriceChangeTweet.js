@@ -33,12 +33,12 @@ export async function tweetPriceChanges() {
       dc.fallers 
         ? dc.fallers
           .sort((a, b) => a.new_price < b.new_price)
-          .forEach(fl => tweet_string_fallers += `\n${fl.short_name} - £${(fl.new_price / 10).toFixed(1)}m 🔻`)
+          .forEach(f => tweet_string_fallers += `\n${f.short_name} - £${(f.new_price / 10).toFixed(1)}m 🔻`)
         : ''
       dc.risers 
         ? dc.risers
           .sort((a, b) => a.new_price < b.new_price)
-          .forEach(fl => tweet_string_risers += `\n${fl.short_name} - £${(fl.new_price / 10).toFixed(1)}m 🔼`)
+          .forEach(r => tweet_string_risers += `\n${r.short_name} - £${(r.new_price / 10).toFixed(1)}m 🔼`)
         : ''
     })
 
