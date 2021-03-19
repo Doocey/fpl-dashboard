@@ -42,7 +42,6 @@ export async function tweetPriceChanges() {
         : ''
     })
 
-
     if(tweet_string_fallers.length > 0) {
       tweet_string_fallers = 'Price Fallers: \n' + tweet_string_fallers + '\n\n#FPLPriceChanges'
     }
