@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-import styles from "../../styles/PriceChanges.module.css";
 import { getPriceChanges } from "../../util/getPriceChanges";
 
 export default function PriceChanges({ prices }) {
@@ -8,61 +7,82 @@ export default function PriceChanges({ prices }) {
   const price_changes_week = JSON.parse(prices);
 
   return (
-    <section className="container">
+    <section className="mx-auto container my-4">
       <Head>
         <title>Fantasy Premier League Price Changes</title>
         <meta
           name="description"
-          content="Daily Fantasy Premier League price changes for the game we love to hate"
+          content="Daily Fantasy Premier League price changes for the game we love to hate."
         />
       </Head>
 
-      <main>
-        <h1 className={styles.h1}>
-          Number of days on record: <span>{price_changes_week.length}</span>
+      <main className="w-11/12 md:w-3/4 mx-auto">
+        <h1 className="text-center text-4xl sm:text-6xl font-semibold py-4 md:pt-6 md:pb-10">
+          Number of days on record: <span className="text-green-500">{price_changes_week.length}</span>
         </h1>
 
+        <hr />
+
         {price_changes_week.map((pc) => (
-          <section className={styles.table_container} key={pc._id}>
-            <h2>{new Date(pc._id).toDateString()}</h2>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Player:</th>
-                  <th>New Price:</th>
-                  <th>Owned By: (%)</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div className="w-100 md:w-3/4 mx-auto mb-5" key={pc._id}>
+            <h2 className="text-2xl font-bold text-center pt-4 pb-2 text-gray-800">{new Date(pc._id).toDateString()}:</h2>
+              <table className="w-full lg:w-4/5 mx-auto shadow-lg border-b border-gray-200 sm:rounded-lg">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th scope="col" className="px-6 py-3 text-left text-xs text-gray-400 uppercase tracking-wider">
+                      Player
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs text-gray-400 uppercase tracking-wider">
+                      New Price:
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs text-gray-400 uppercase tracking-wider">
+                      Owned By: (%)
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
                 {pc.risers
                   ? pc.risers.map((p) => (
-                      <tr className={styles.risers} key={`riser-${p.id}`}>
-                        <td>
-                          <Link href={`/player/${p.id}`}>
-                            <a>{p.short_name}</a>
-                          </Link>
-                        </td>
-                        <td>£{(p.new_price / 10).toFixed(1)}m</td>
-                        <td>{p.percentage_ownership}%</td>
-                      </tr>
+                    <tr className="bg-green-500 text-green-800">
+                      <td className="px-6 py-3 text-md font-medium text-white tracking-wider">
+                        <Link href={`/player/${p.id}`}>
+                          <a>{p.short_name}</a>
+                        </Link>
+                      </td>
+                      <td className="px-6 py-3 text-md text-white font-medium">
+                        £{(p.new_price / 10).toFixed(1)}m
+                      </td>
+                      <td className="px-6 py-3">
+                        <span className="px-2 inline-flex text-sm leading-7 font-semibold rounded-full bg-green-100 text-green-800">
+                          {p.percentage_ownership}%
+                        </span>
+                      </td>
+                    </tr>
                     ))
                   : ""}
+
                 {pc.fallers
                   ? pc.fallers.map((p) => (
-                      <tr className={styles.fallers} key={`faller-${p.id}`}>
-                        <td>
-                          <Link href={`/player/${p.id}`}>
-                            <a>{p.short_name}</a>
-                          </Link>
-                        </td>
-                        <td>£{(p.new_price / 10).toFixed(1)}m</td>
-                        <td>{p.percentage_ownership}%</td>
-                      </tr>
+                    <tr className="bg-red-500 text-red-800">
+                      <td className="px-6 py-3 text-md font-medium text-white tracking-wider">
+                        <Link href={`/player/${p.id}`}>
+                          <a>{p.short_name}</a>
+                        </Link>
+                      </td>
+                      <td className="px-6 py-3 text-md text-white font-medium">
+                          £{(p.new_price / 10).toFixed(1)}m
+                      </td>
+                      <td className="px-6 py-3">
+                        <span className="px-2 inline-flex text-sm leading-7 font-semibold rounded-full bg-red-100 text-red-800">
+                          {p.percentage_ownership}%
+                        </span>
+                      </td>
+                    </tr>
                     ))
                   : ""}
-              </tbody>
-            </table>
-          </section>
+                </tbody>
+              </table>
+          </div>
         ))}
       </main>
     </section>
