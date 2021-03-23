@@ -6,7 +6,7 @@ export default function Home({ players }) {
   return (
     <div className="lg:container mx-4 lg:mx-auto">
       <Head>
-        <title>Fantasy League Data</title>
+        <title>Fantasy Premier League Dashboard - price changers, and game stats.</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="List of all registered Fantasy Premier League players."/>
       </Head>
@@ -17,16 +17,16 @@ export default function Home({ players }) {
         </h1>
 
         <p className="text-lg sm:text-2xl text-gray-700 pb-4">
-          A complete list of all currently <em>available</em> players, with their unique idenifier.
+          A list of all currently <em>available</em> players that have scored at least 100 points, with their unique idenifier.
           Anyone not on the list is out on loan, has left the club permanently, or has not made their club's registered squad list.
-          Sorted by most expensive to cheapest.
+          Sorted by highest scoring players on the game.
         </p>
 
         <p className="text-lg sm:text-2xl text-gray-700 pb-5">Each tile should route you to a specific player profile - using Next.js' Dynamic Routing.</p>
 
         <div className="flex flex-wrap justify-between items-center">
           {players
-          .sort((a, b) => a.now_cost < b.now_cost)
+            .sort((a, b) => a.total_points < b.total_points)
             .map((player) =>
               <Link href={'/player/' + (player.id).toString()} key={(player.id).toString()}>
                 <div className="w-1/2 md:w-1/4 h-100 p-2">
@@ -54,7 +54,7 @@ export async function getStaticProps() {
    */
   
   const res = await getLivePlayerPrices()
-  const players = res.filter(player => !(player.status === 'u'))
+  const players = res.filter(player => !(player.status === 'u') && player.total_points > 100)
   return {
     props: {
       players
