@@ -1,39 +1,44 @@
-import styles from '../styles/Home.module.css'
 import Head from 'next/head'
 import Link from 'next/link'
 import { getLivePlayerPrices } from '../util/getLivePlayerPrices'
 
 export default function Home({ players }) {
   return (
-    <div className={styles.container}>
+    <div className="lg:container mx-4 lg:mx-auto">
       <Head>
         <title>Fantasy League Data</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="List of all registered Fantasy Premier League players."/>
       </Head>
 
-      <main>
-        <h1 className={styles.title}>
+      <main className="py-4">
+        <h1 className="text-4xl sm:text-6xl font-semibold py-4 md:pt-6 md:pb-8">
           Fantasy League Players
         </h1>
 
-        <p className={styles.description}>
+        <p className="text-lg sm:text-2xl text-gray-700 pb-4">
           A complete list of all currently <em>available</em> players, with their unique idenifier.
           Anyone not on the list is out on loan, has left the club permanently, or has not made their club's registered squad list.
           Sorted by most expensive to cheapest.
         </p>
 
-        <p>Each tile should route you to a specific player profile - using Next.js' Dynamic Routing.</p>
+        <p className="text-lg sm:text-2xl text-gray-700 pb-5">Each tile should route you to a specific player profile - using Next.js' Dynamic Routing.</p>
 
-        <nav className={styles.grid} style={{borderBottom: '0'}}>
+        <div className="flex flex-wrap justify-between items-center">
           {players
-            .sort((a,b) => a.now_cost < b.now_cost)
+          .sort((a, b) => a.now_cost < b.now_cost)
             .map((player) =>
               <Link href={'/player/' + (player.id).toString()} key={(player.id).toString()}>
-                <a className={styles.card}>{player.web_name} - <code>{player.id}</code> - <strong>£{(player.now_cost / 10).toFixed(1)}m </strong></a>
+                <div className="w-1/2 md:w-1/4 h-100 p-2">
+                  <a className="block bg-gray border-2 border-gray-200 p-3 md:p-5 shadow-sm">
+                    <h4 className="text-xl font-semibold">{player.web_name}</h4>
+                    <h5 className="font-semibold text-blue-600 py-1">£{(player.now_cost / 10).toFixed(1)}m</h5>
+                    <code>ID: {player.id}</code>
+                  </a>
+                </div>
               </Link>
             )} 
-        </nav>        
+        </div>        
       </main>
     </div>
   )

@@ -3,11 +3,11 @@ import Nav from "./Nav"
 
 const Layout = ({ children }) => {
   return (
-    <div className="content">
-      <Nav />
-      { children }
-      <Footer />
-    </div>
+      <section className="bg-gray-50">
+        <Nav />
+        { children }
+        <Footer />
+      </section>
   );
 }
 
