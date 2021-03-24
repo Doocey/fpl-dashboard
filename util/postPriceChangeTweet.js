@@ -43,11 +43,11 @@ export async function tweetPriceChanges() {
     })
 
     if(tweet_string_fallers.length > 0) {
-      tweet_string_fallers = 'Price Fallers: \n' + tweet_string_fallers + '\n\n#FPLPriceChanges'
+      tweet_string_fallers = '#FPL Price Fallers: \n' + tweet_string_fallers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
     }
 
     if (tweet_string_risers.length > 0) {
-      tweet_string_risers = 'Price Risers: \n' + tweet_string_risers + '\n\n#FPLPriceChanges'
+      tweet_string_risers = '#FPL Price Risers: \n' + tweet_string_risers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
     }
 
     // Send off Price Risers & Fallers, if there's any of them!
