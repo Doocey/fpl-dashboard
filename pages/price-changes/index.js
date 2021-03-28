@@ -17,10 +17,8 @@ export default function PriceChanges({ prices }) {
       </Head>
 
       <main className="w-11/12 md:w-3/4 mx-auto">
-        <h1 className="text-center text-4xl sm:text-6xl font-semibold py-4 md:pt-6 md:pb-10">
-          Number of days on record: <span className="text-green-500">{price_changes_week.length}</span>
-        </h1>
-
+        <h1 className="text-center text-4xl sm:text-6xl font-semibold py-3 md:pt-6 md:pb-5">FPL Price Changes</h1>
+        <h2 className="text-center text-lg sm:text-2xl pb-4">Recorded price rises/falls for the past week in the FPL.</h2>
         <hr />
 
         {price_changes_week.map((pc) => (

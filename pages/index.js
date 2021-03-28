@@ -6,7 +6,7 @@ export default function Home({ players }) {
   return (
     <div className="lg:container mx-4 lg:mx-auto">
       <Head>
-        <title>Fantasy Premier League Dashboard - price changers, and game stats.</title>
+        <title>Fantasy Premier League Dashboard - Price Changes & Game Stats.</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="List of all registered Fantasy Premier League players."/>
       </Head>
