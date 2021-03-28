@@ -44,7 +44,7 @@ export default function Player({ data: { player } }) {
                 </div>
 
                 <p className="leading-relaxed font-bold text-lg">
-                  Gameweek Net Transfers: 
+                  GW Net Transfers: 
                   {
                   (player.transfers_in_event - player.transfers_out_event) > 0 
                     ? <span className="ml-3 bg-green-300 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">{player.transfers_in_event - player.transfers_out_event}</span> 
@@ -57,7 +57,6 @@ export default function Player({ data: { player } }) {
             </div>
           </div>
         </div>
-
       </main>
     </div>
   )

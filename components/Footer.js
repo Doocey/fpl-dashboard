@@ -1,7 +1,7 @@
 function Footer() {
   return (
-      <footer className="bg-gray-300">
-        <div className="max-w-7xl mx-auto p-4 text-black">
+      <footer className="bg-gray-200">
+        <div className="max-w-7xl mx-auto p-2 px-5 md:py-4 text-black">
           <p>&copy; Kevin Doocey</p>
         </div>
       </footer>
