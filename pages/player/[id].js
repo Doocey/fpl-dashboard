@@ -1,4 +1,4 @@
-import styles from '../../styles/Player.module.css'
+// import styles from '../../styles/Player.module.css'
 import Head from 'next/head'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import Image from 'next/image'
@@ -11,7 +11,7 @@ export default function Player({ data: { player } }) {
   // Form the player's full name using string concat method this time - could have constructed different ways, but trying this out
   const meta_description = `Fantasy League profile for ${player.team.name}'s ${player.first_name.concat(' ', player.second_name)}`
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>{player.web_name}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -20,40 +20,43 @@ export default function Player({ data: { player } }) {
       </Head>
 
       <main>
-        <div className={styles.card}>
-          <Image
-            src={player_image}
-            alt={player.web_name}
-            width={220}
-            height={280}
-          />
-          <h1 className={styles.title}>
-            {player.first_name} {player.second_name}
-          </h1>
+        <div className="container mx-auto">
+          <div className="p-10 text-center">
+            <div className="max-w-sm rounded overflow-hidden shadow-lg mx-auto">
+              <Image
+                src={player_image}
+                alt={player.web_name}
+                width={220}
+                height={280}
+                className="w-full"
+              />
+              <div className="px-6 py-4">
+                <h1 className="font-bold text-2xl mb-2 tracking-wide">{player.first_name} {player.second_name}</h1>
 
-          <h2>
-            Price: <span>£{(player.now_cost / 10).toFixed(1)}m</span>
-          </h2>
+                <h2 className="inline-block rounded-full text-xl font-medium bg-gray-200 px-3 py-1 text-sm text-gray-700 mr-2 mb-1 text-lg">£{(player.now_cost / 10).toFixed(1)}m</h2>
 
-          <h3>Goals Scored: {player.goals_scored}</h3>
+                <div className="px-2 pt-4 pb-2 text-center text-lg text-gray-800">
+                  <p>Total Points: {player.total_points}</p>
+                  <p>Goals Scored: {player.goals_scored}</p>
+                  <p>Selected By: {player.selected_by_percent}%</p>
+                  <p>Transfers In: {player.transfers_in_event}</p>
+                  <p>Transfers Out: {player.transfers_out_event}</p>
+                </div>
 
-          <code>Total Points: {player.total_points}</code>
-
-          <h4>Selected By: <span>{player.selected_by_percent}%</span></h4>
-
-          <div className={styles.card}>
-            <p>Transfers In:  <strong>{player.transfers_in_event}</strong></p>
-
-            <p>Transfers Out: <strong>{player.transfers_out_event}</strong></p>
-            <hr />
-            <p>Net Transfers: <span className={styles.net_transfers}>{player.transfers_in_event - player.transfers_out_event}</span></p>
+                <p className="leading-relaxed font-bold text-lg">
+                  GW Net Transfers: 
+                  {
+                  (player.transfers_in_event - player.transfers_out_event) > 0 
+                    ? <span className="ml-3 bg-green-300 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">{player.transfers_in_event - player.transfers_out_event}</span> 
+                    : <span className="ml-3 bg-red-300 rounded-full px-3 py-1 text-sm font-semibold text-red-700 mr-2 mb-2">{player.transfers_in_event - player.transfers_out_event}</span>
+                  }
+                </p>
+                
+                {player.news.length ? <mark className="block my-3 rounded py-1 px-2 leading-relaxed bg-red-400 text-white text-sm">🚨 {player.news}</mark> : ''}
+              </div>
+            </div>
           </div>
-
-          {
-            player.news.length ? <mark className={styles.d_block}>🚨 {player.news}</mark> : ''
-          }
         </div>
-
       </main>
     </div>
   )

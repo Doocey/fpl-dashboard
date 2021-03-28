@@ -42,20 +42,18 @@ export async function tweetPriceChanges() {
         : ''
     })
 
+    // Send off Price Risers & Fallers, if there's any of them!
     if(tweet_string_fallers.length > 0) {
       tweet_string_fallers = '#FPL Price Fallers: \n' + tweet_string_fallers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
+      var tweetedFallers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_fallers });
     }
 
-    if (tweet_string_risers.length > 0) {
+    if(tweet_string_risers.length > 0) {
       tweet_string_risers = '#FPL Price Risers: \n' + tweet_string_risers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
+      var tweetedRisers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_risers });
+      console.log('Done with risers')
     }
-
-    // Send off Price Risers & Fallers, if there's any of them!
-
     /** TODO: Can I optimize this code to be more efficient? */
-    const tweetedFallers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_fallers });
-    const tweetedRisers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_risers });
-
     return [tweetedFallers, tweetedRisers]
   } catch (error) {
     return error

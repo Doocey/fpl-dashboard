@@ -17,25 +17,23 @@ export default function PriceChanges({ prices }) {
       </Head>
 
       <main className="w-11/12 md:w-3/4 mx-auto">
-        <h1 className="text-center text-4xl sm:text-6xl font-semibold py-4 md:pt-6 md:pb-10">
-          Number of days on record: <span className="text-green-500">{price_changes_week.length}</span>
-        </h1>
-
+        <h1 className="text-center text-4xl sm:text-6xl font-semibold py-3 md:pt-6 md:pb-5">FPL Price Changes</h1>
+        <h2 className="text-center text-lg sm:text-2xl pb-4">Recorded price rises/falls for the past week in the FPL.</h2>
         <hr />
 
         {price_changes_week.map((pc) => (
           <div className="w-100 md:w-3/4 mx-auto mb-5" key={pc._id}>
-            <h2 className="text-2xl font-bold text-center pt-4 pb-2 text-gray-800">{new Date(pc._id).toDateString()}:</h2>
+            <h2 className="text-2xl font-bold text-center pt-4 pb-3 text-gray-800">{new Date(pc._id).toDateString()}:</h2>
               <table className="w-full lg:w-4/5 mx-auto shadow-lg border-b border-gray-200 sm:rounded-lg">
-                <thead className="bg-gray-50">
+                <thead className="bg-gray-200 text-gray-500">
                   <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs text-gray-400 uppercase tracking-wider">
+                    <th scope="col" className="px-4 py-3 text-left text-xs uppercase tracking-wider">
                       Player
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs text-gray-400 uppercase tracking-wider">
+                    <th scope="col" className="px-4 py-3 text-left text-xs uppercase tracking-wider">
                       New Price:
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs text-gray-400 uppercase tracking-wider">
+                    <th scope="col" className="px-4 py-3 text-left text-xs uppercase tracking-wider">
                       Owned By: (%)
                     </th>
                   </tr>
@@ -43,7 +41,7 @@ export default function PriceChanges({ prices }) {
                 <tbody className="bg-white divide-y divide-gray-200">
                 {pc.risers
                   ? pc.risers.map((p) => (
-                    <tr className="bg-green-500 text-green-800">
+                    <tr className="bg-green-700 text-green-800">
                       <td className="px-6 py-3 text-md font-medium text-white tracking-wider">
                         <Link href={`/player/${p.id}`}>
                           <a>{p.short_name}</a>
@@ -63,7 +61,7 @@ export default function PriceChanges({ prices }) {
 
                 {pc.fallers
                   ? pc.fallers.map((p) => (
-                    <tr className="bg-red-500 text-red-800">
+                    <tr className="bg-red-600 text-red-800">
                       <td className="px-6 py-3 text-md font-medium text-white tracking-wider">
                         <Link href={`/player/${p.id}`}>
                           <a>{p.short_name}</a>

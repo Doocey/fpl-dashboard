@@ -6,7 +6,7 @@ export default function Home({ players }) {
   return (
     <div className="lg:container mx-4 lg:mx-auto">
       <Head>
-        <title>Fantasy Premier League Dashboard - price changers, and game stats.</title>
+        <title>Fantasy Premier League Dashboard - Price Changes & Game Stats.</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="List of all registered Fantasy Premier League players."/>
       </Head>
@@ -16,24 +16,24 @@ export default function Home({ players }) {
           Fantasy League Players
         </h1>
 
-        <p className="text-lg sm:text-2xl text-gray-700 pb-4">
+        <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-4">
           A list of all currently <em>available</em> players that have scored at least 100 points, with their unique idenifier.
           Anyone not on the list is out on loan, has left the club permanently, or has not made their club's registered squad list.
           Sorted by highest scoring players on the game.
         </p>
 
-        <p className="text-lg sm:text-2xl text-gray-700 pb-5">Each tile should route you to a specific player profile - using Next.js' Dynamic Routing.</p>
+        <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-5">Each tile should route you to a specific player profile - using <span className="underline">Next.js'</span> Dynamic Routing.</p>
 
         <div className="flex flex-wrap justify-between items-center">
           {players
             .sort((a, b) => a.total_points < b.total_points)
             .map((player) =>
               <Link href={'/player/' + (player.id).toString()} key={(player.id).toString()}>
-                <div className="w-1/2 md:w-1/4 h-100 p-2">
-                  <a className="block bg-gray border-2 border-gray-200 p-3 md:p-5 shadow-sm">
+                <div className="w-1/2 md:w-1/5 h-100">
+                  <a className="block bg-gray border-2 border-gray-200 shadow-sm m-1 p-3 md:p-5">
                     <h4 className="text-xl font-semibold">{player.web_name}</h4>
-                    <h5 className="font-semibold text-blue-600 py-1">£{(player.now_cost / 10).toFixed(1)}m</h5>
-                    <code>ID: {player.id}</code>
+                    <h5 className="font-semibold text-green-700 py-1">£{(player.now_cost / 10).toFixed(1)}m</h5>
+                    <code className="text-sm">ID: {player.id}</code>
                   </a>
                 </div>
               </Link>
