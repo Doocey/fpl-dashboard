@@ -1,13 +1,10 @@
 import { connectToDatabase } from './mongodb'
 import { getLivePlayerPrices } from './getLivePlayerPrices'
-import { getDatabasePrices } from './getDatabasePrices'
 const { MONGODB_PRICE_CHANGES_COLLECTION, MONGODB_PRICE_COLLECTION } = process.env;
 
 export async function getPriceChanges() {
     // Grab latest player prices from official FPL API
     const live_pp = await getLivePlayerPrices()
-    // Grab stored DB player prices
-    // const database_pp = await getDatabasePrices()
     // db connection
     const { db } = await connectToDatabase();
 

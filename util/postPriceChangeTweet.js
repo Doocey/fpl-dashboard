@@ -32,12 +32,10 @@ export async function tweetPriceChanges() {
     daily_changes.forEach(dc => {
       dc.fallers 
         ? dc.fallers
-          .sort((a, b) => a.new_price < b.new_price)
           .forEach(f => tweet_string_fallers += `\n${f.short_name} - £${(f.new_price / 10).toFixed(1)}m 🔻`)
         : ''
       dc.risers 
         ? dc.risers
-          .sort((a, b) => a.new_price < b.new_price)
           .forEach(r => tweet_string_risers += `\n${r.short_name} - £${(r.new_price / 10).toFixed(1)}m 🔼`)
         : ''
     })
@@ -51,7 +49,6 @@ export async function tweetPriceChanges() {
     if(tweet_string_risers.length > 0) {
       tweet_string_risers = '#FPL Price Risers: \n' + tweet_string_risers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
       var tweetedRisers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_risers });
-      console.log('Done with risers')
     }
     /** TODO: Can I optimize this code to be more efficient? */
     return [tweetedFallers, tweetedRisers]

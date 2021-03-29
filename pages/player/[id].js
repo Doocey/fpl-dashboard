@@ -30,29 +30,48 @@ export default function Player({ data: { player } }) {
                 height={280}
                 className="w-full"
               />
-              <div className="px-6 py-4">
-                <h1 className="font-bold text-2xl mb-2 tracking-wide">{player.first_name} {player.second_name}</h1>
+              <div className="py-4">
+                <h1 className="font-bold text-2xl mb-4">{player.first_name} {player.second_name}</h1>
 
-                <h2 className="inline-block rounded-full text-xl font-medium bg-gray-200 px-3 py-1 text-sm text-gray-700 mr-2 mb-1 text-lg">£{(player.now_cost / 10).toFixed(1)}m</h2>
+                <h2 className="inline-block rounded-full text-xl font-medium bg-gray-200 px-3 py-1 text-sm text-gray-700 mr-2 mb-1 text-lg">
+                  £{(player.now_cost / 10).toFixed(1)}m
+                </h2>
 
-                <div className="px-2 pt-4 pb-2 text-center text-lg text-gray-800">
-                  <p>Total Points: {player.total_points}</p>
-                  <p>Goals Scored: {player.goals_scored}</p>
-                  <p>Selected By: {player.selected_by_percent}%</p>
-                  <p>Transfers In: {player.transfers_in_event}</p>
-                  <p>Transfers Out: {player.transfers_out_event}</p>
-                </div>
+                {/* <div className="px-2 pt-4 pb-2 text-left text-lg text-gray-800">
+                  <p>Total Points: <strong>{player.total_points}</strong></p>
+                  <p>Goals Scored: <strong>{player.goals_scored}</strong></p>
+                  <p>Selected By: <strong>{player.selected_by_percent}%</strong></p>
+                  <p>Transfers In: <strong>{player.transfers_in_event}</strong></p>
+                  <p>Transfers Out: <strong>{player.transfers_out_event}</strong></p>
+                </div> */}
 
-                <p className="leading-relaxed font-bold text-lg">
+                <table class="table my-4 w-full">
+                  <thead>
+                    <tr className="py-2">
+                      <th class="w-1/4">Goals</th>
+                      <th class="w-1/4">Selected By</th>
+                      <th class="w-1/4">Total Points</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="text-lg">
+                      <td className="bg-gray-100 py-2">{player.goals_scored}</td>
+                      <td className="bg-gray-200 py-2">{player.selected_by_percent}%</td>
+                      <td className="bg-gray-300 py-2 font-bold">{player.total_points}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <p className="leading-relaxed font-bold text-lg py-3 text-gray-700">
                   GW Net Transfers: 
                   {
-                  (player.transfers_in_event - player.transfers_out_event) > 0 
-                    ? <span className="ml-3 bg-green-300 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">{player.transfers_in_event - player.transfers_out_event}</span> 
-                    : <span className="ml-3 bg-red-300 rounded-full px-3 py-1 text-sm font-semibold text-red-700 mr-2 mb-2">{player.transfers_in_event - player.transfers_out_event}</span>
+                    (player.transfers_in_event - player.transfers_out_event) > 0 
+                      ? <span className="ml-3 bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-green-50">{player.transfers_in_event - player.transfers_out_event}</span> 
+                      : <span className="ml-3 bg-red-600 rounded-full px-3 py-1 text-sm font-semibold text-red-50">{player.transfers_in_event - player.transfers_out_event}</span>
                   }
                 </p>
                 
-                {player.news.length ? <mark className="block my-3 rounded py-1 px-2 leading-relaxed bg-red-400 text-white text-sm">🚨 {player.news}</mark> : ''}
+                {player.news.length ? <mark className="block my-3 py-1 px-2 leading-relaxed bg-red-500 text-white text-sm">🚨 {player.news}</mark> : ''}
               </div>
             </div>
           </div>
