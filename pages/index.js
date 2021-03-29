@@ -22,7 +22,7 @@ export default function Home({ players }) {
           Sorted by highest scoring players on the game.
         </p>
 
-        <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-5">Each tile should route you to a specific player profile - using <span className="underline">Next.js'</span> Dynamic Routing.</p>
+        <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-6">Each tile should route you to a specific player profile - using <span className="underline">Next.js'</span> Dynamic Routing.</p>
 
         <div className="flex flex-wrap justify-between items-center">
           {players
