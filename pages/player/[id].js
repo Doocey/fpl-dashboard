@@ -32,22 +32,13 @@ export default function Player({ data: { player } }) {
               />
               <div className="py-4">
                 <h1 className="font-bold text-2xl mb-4">{player.first_name} {player.second_name}</h1>
-
-                <h2 className="inline-block rounded-full text-xl font-medium bg-gray-200 px-3 py-1 text-sm text-gray-700 mr-2 mb-1 text-lg">
+                <h2 className="inline-block rounded-full text-xl font-medium bg-gray-200 px-3 py-1 text-sm text-gray-700 mb-1">
                   £{(player.now_cost / 10).toFixed(1)}m
                 </h2>
 
-                {/* <div className="px-2 pt-4 pb-2 text-left text-lg text-gray-800">
-                  <p>Total Points: <strong>{player.total_points}</strong></p>
-                  <p>Goals Scored: <strong>{player.goals_scored}</strong></p>
-                  <p>Selected By: <strong>{player.selected_by_percent}%</strong></p>
-                  <p>Transfers In: <strong>{player.transfers_in_event}</strong></p>
-                  <p>Transfers Out: <strong>{player.transfers_out_event}</strong></p>
-                </div> */}
-
-                <table class="table my-4 w-full">
+                <table class="table mt-5 mb-3 w-full">
                   <thead>
-                    <tr className="py-2">
+                    <tr className="text-sm sm:text-base text-gray-700">
                       <th class="w-1/4">Goals</th>
                       <th class="w-1/4">Selected By</th>
                       <th class="w-1/4">Total Points</th>
@@ -62,12 +53,12 @@ export default function Player({ data: { player } }) {
                   </tbody>
                 </table>
 
-                <p className="leading-relaxed font-bold text-lg py-3 text-gray-700">
+                <p className="flex items-center w-full justify-center leading-relaxed font-bold text-lg py-3 text-gray-700">
                   GW Net Transfers: 
                   {
                     (player.transfers_in_event - player.transfers_out_event) > 0 
-                      ? <span className="ml-3 bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-green-50">{player.transfers_in_event - player.transfers_out_event}</span> 
-                      : <span className="ml-3 bg-red-600 rounded-full px-3 py-1 text-sm font-semibold text-red-50">{player.transfers_in_event - player.transfers_out_event}</span>
+                      ? <span className="ml-4 bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-green-50">{player.transfers_in_event - player.transfers_out_event}</span> 
+                      : <span className="ml-4 bg-red-600 rounded-full px-3 py-1 text-sm font-semibold text-red-50">{player.transfers_in_event - player.transfers_out_event}</span>
                   }
                 </p>
                 

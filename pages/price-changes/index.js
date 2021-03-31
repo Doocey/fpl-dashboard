@@ -41,7 +41,7 @@ export default function PriceChanges({ prices }) {
                 <tbody className="bg-white divide-y divide-gray-200">
                 {pc.risers
                   ? pc.risers.map((p) => (
-                    <tr className="bg-green-700 text-green-800">
+                    <tr className="bg-green-700 text-green-800" key={pc._id}>
                       <td className="px-6 py-3 text-md font-medium text-white tracking-wider">
                         <Link href={`/player/${p.id}`}>
                           <a>{p.short_name}</a>
