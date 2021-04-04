@@ -31,7 +31,7 @@ export default function Player({ data: { player } }) {
                 className="w-full"
               />
               <div className="py-4">
-                <h1 className="font-bold text-2xl mb-4">{player.first_name} {player.second_name}</h1>
+                <h1 className="font-bold text-2xl mb-4 px-3">{player.first_name} {player.second_name}</h1>
                 <h2 className="inline-block rounded-full text-xl font-medium bg-gray-200 px-3 py-1 text-sm text-gray-700 mb-1">
                   £{(player.now_cost / 10).toFixed(1)}m
                 </h2>
