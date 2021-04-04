@@ -36,12 +36,12 @@ export default function Player({ data: { player } }) {
                   £{(player.now_cost / 10).toFixed(1)}m
                 </h2>
 
-                <table class="table mt-5 mb-3 w-full">
+                <table className="table mt-5 mb-3 w-full">
                   <thead>
                     <tr className="text-sm sm:text-base text-gray-700">
-                      <th class="w-1/4">Goals</th>
-                      <th class="w-1/4">Selected By</th>
-                      <th class="w-1/4">Total Points</th>
+                      <th className="w-1/4">Goals</th>
+                      <th className="w-1/4">Selected By</th>
+                      <th className="w-1/4">Total Points</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -61,9 +61,8 @@ export default function Player({ data: { player } }) {
                       : <span className="ml-4 bg-red-600 rounded-full px-3 py-1 text-sm font-semibold text-red-50">{player.transfers_in_event - player.transfers_out_event}</span>
                   }
                 </p>
-                
-                {player.news.length ? <mark className="block my-3 py-1 px-2 leading-relaxed bg-red-500 text-white text-sm">🚨 {player.news}</mark> : ''}
               </div>
+              {player.news.length ? <mark className="block p-2 leading-relaxed bg-red-500 text-white text-sm">🚨 {player.news}</mark> : ''}
             </div>
           </div>
         </div>

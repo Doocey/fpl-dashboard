@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "next build && node sitemap-generator.js",
+    "start": "next start",
+    "generate-sitemap": "node sitemap-generator.js"
   },
   "dependencies": {
     "@apollo/client": "^3.3.7",
+    "@sergeymyssak/nextjs-sitemap": "^1.1.1",
     "axios": "^0.21.1",
     "graphql": "^15.5.0",
     "mongodb": "^3.6.4",
@@ -20,6 +22,7 @@
   "devDependencies": {
     "autoprefixer": "^10.2.5",
     "postcss": "^8.2.8",
-    "tailwindcss": "^2.0.4"
+    "tailwindcss": "^2.0.4",
+    "@sergeymyssak/nextjs-sitemap": "1.1.1"
   }
 }
