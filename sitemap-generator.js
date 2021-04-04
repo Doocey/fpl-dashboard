@@ -1,7 +1,5 @@
 const { configureSitemap } = require('@sergeymyssak/nextjs-sitemap');
 
-console.log(process)
-
 const Sitemap = configureSitemap({
   baseUrl: 'https://fpldashboard.dev',
   exclude: ['/api/*', '/404/', '/player/*'],
