@@ -8,7 +8,7 @@ export default function Home({ players }) {
       <Head>
         <title>Fantasy Premier League Dashboard - Price Changes & Game Stats.</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="List of all registered Fantasy Premier League players."/>
+        <meta name="description" content="Daily FPL Price Changes & player statistics for the 2020/21 season."/>
       </Head>
 
       <main className="py-4">
