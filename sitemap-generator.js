@@ -5,7 +5,7 @@ const Sitemap = configureSitemap({
   exclude: ['/api/*', '/404/', '/player/*'],
   excludeIndex: true,
   pagesConfig: {
-    '/price-changes/': {
+    '/price-changes': {
       priority: '0.9',
       changefreq: 'daily',
     },
