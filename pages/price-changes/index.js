@@ -10,10 +10,8 @@ export default function PriceChanges({ prices }) {
     <section className="mx-auto container my-4">
       <Head>
         <title>Fantasy Premier League Price Changes</title>
-        <meta
-          name="description"
-          content="Daily Fantasy Premier League price changes for the game we love to hate."
-        />
+        <meta name="description" content="FPL Price Changes updated daily. Keep track of weekly price movers to help improve your game."/>
+        <link rel="canonical" href="https://fpldashboard.dev/price-changes" />
       </Head>
 
       <main className="w-11/12 md:w-3/4 mx-auto">

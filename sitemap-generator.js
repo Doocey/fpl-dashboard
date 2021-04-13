@@ -5,12 +5,12 @@ const Sitemap = configureSitemap({
   exclude: ['/api/*', '/404/', '/player/*'],
   excludeIndex: true,
   pagesConfig: {
-    '/price-changes/': {
+    '/price-changes': {
       priority: '0.9',
       changefreq: 'daily',
     },
   },
-  isTrailingSlashRequired: true,
+  isTrailingSlashRequired: false,
   targetDirectory: __dirname + '/public',
   pagesDirectory: __dirname + '/pages',
 });
