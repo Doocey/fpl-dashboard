@@ -1,13 +1,13 @@
-name: test-cron
-
+name: Vercel SiteRebuild
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: '*/5 * * * *'
 jobs:
-  cron:
+  build:
+    name: Vercel Rebuild & Daily Price Changes Tweet-out
     runs-on: ubuntu-latest
     steps:
-      - name: Testing out a cron job via GitHub Action
-        run: |
-          curl --request POST \
-          --url 'https://api.vercel.com/v1/integrations/deploy/prj_7SVgVvZTFAS679ZJqpWSTCBYnpFK/snjLOrwFbQ'
+      - name: Rebuild Site
+        run: curl -X POST -d {} https://api.vercel.com/v1/integrations/deploy/prj_7SVgVvZTFAS679ZJqpWSTCBYnpFK/snjLOrwFbQ
+      - name: Tweet Price Changes
+        run: curl -X POST -d {} https://fpldashboard.dev/api/twitter
