@@ -1,0 +1,13 @@
+name: test-cron
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing out a cron job via GitHub Action
+        run: |
+          curl --request POST \
+          --url 'https://api.vercel.com/v1/integrations/deploy/prj_7SVgVvZTFAS679ZJqpWSTCBYnpFK/snjLOrwFbQ'
