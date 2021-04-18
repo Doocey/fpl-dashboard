@@ -1,6 +1,8 @@
 name: test-cron
+
+on:
   schedule:
-    - cron: '00 15 * * *'
+    - cron: "00 15 * * *"
 jobs:
   cron:
     runs-on: ubuntu-latest
