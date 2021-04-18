@@ -1,7 +1,7 @@
 name: Vercel SiteRebuild
 on:
   schedule:
-    - cron: '*/47 * * * *'
+    - cron: '53 10 * * *'
 jobs:
   build:
     name: Vercel Rebuild & Daily Price Changes Tweet-out
