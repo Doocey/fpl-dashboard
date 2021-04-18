@@ -1,0 +1,11 @@
+name: test-cron
+  schedule:
+    - cron: '00 15 * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing out a crone
+        run: |
+          curl --request POST \
+          --url 'https://api.vercel.com/v1/integrations/deploy/prj_7SVgVvZTFAS679ZJqpWSTCBYnpFK/snjLOrwFbQ'
