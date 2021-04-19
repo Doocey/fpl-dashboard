@@ -1,0 +1,11 @@
+name: Daily Price Changes Tweet-out
+on:
+  schedule:
+    - cron: '53 10 * * *'
+jobs:
+  build:
+    name: Daily Price Changes Tweet-out
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tweet Price Changes
+        run: curl -X POST -d {} https://fpldashboard.dev/api/twitter
