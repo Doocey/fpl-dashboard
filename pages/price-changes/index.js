@@ -11,6 +11,24 @@ export default function PriceChanges({ prices }) {
       <Head>
         <title>Fantasy Premier League Price Changes</title>
         <meta name="description" content="FPL Price Changes updated daily. Keep track of weekly price movers to help improve your game."/>
+
+        <meta name="title" content="Fantasy Premier League Price Changes" />
+
+
+        {/* <!-- Open Graph / Facebook --> */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://fpldashboard.dev/price-changes" />
+        <meta property="og:title" content="Fantasy Premier League Price Changes" />
+        <meta property="og:description" content="FPL Price Changes updated daily. Keep track of weekly price movers to help improve your game." />
+        <meta property="og:image" content="/fpl-price-changes.png" />
+
+        {/* <!-- Twitter --> */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://fpldashboard.dev/price-changes" />
+        <meta property="twitter:title" content="Fantasy Premier League Price Changes" />
+        <meta property="twitter:description" content="FPL Price Changes updated daily. Keep track of weekly price movers to help improve your game." />
+        <meta property="twitter:image" content="/fpl-price-changes.png" />
+
         <link rel="canonical" href="https://fpldashboard.dev/price-changes" />
       </Head>
 
