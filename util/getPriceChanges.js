@@ -93,6 +93,7 @@ export async function getPriceChanges() {
 
             await db.collection(MONGODB_PRICE_CHANGES_COLLECTION).insertOne({
                 _id: new Date(),
+                date: new Date().toDateString(),
                 fallers: fallers,
                 risers: risers
             })

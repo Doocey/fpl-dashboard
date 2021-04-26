@@ -14,7 +14,6 @@ export default function PriceChanges({ prices }) {
 
         <meta name="title" content="Fantasy Premier League Price Changes" />
 
-
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fpldashboard.dev/price-changes" />

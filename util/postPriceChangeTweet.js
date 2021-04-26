@@ -29,6 +29,11 @@ export async function tweetPriceChanges() {
       .sort({ _id: -1 })
       .toArray()
 
+    // Exit if there aren't any changes
+    if(daily_changes[0].risers.length === 0 && daily_changes[0].fallers.length === 0 ) {
+      return 'No Changes'
+    } 
+
     daily_changes.forEach(dc => {
       dc.fallers 
         ? dc.fallers
