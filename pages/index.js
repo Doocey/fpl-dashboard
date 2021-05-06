@@ -31,9 +31,9 @@ export default function Home({ players }) {
               <Link href={'/player/' + (player.id).toString()} key={(player.id).toString()}>
                 <div className="w-1/2 md:w-1/5 h-100">
                   <a className="block bg-gray border-2 border-gray-200 shadow-sm m-1 p-3 md:p-5">
-                    <h4 className="text-xl font-semibold">{player.web_name}</h4>
-                    <h5 className="font-semibold text-green-700 py-1">£{(player.now_cost / 10).toFixed(1)}m</h5>
-                    <code className="text-sm">ID: {player.id}</code>
+                    <h4 className="text-md md:text-xl font-semibold">{player.web_name}</h4>
+                    <h5 className="text-sm md:text-lg font-semibold text-green-700 py-1">£{(player.now_cost / 10).toFixed(1)}m</h5>
+                    <p className="text-xs md:text-lg bg-gold-200 block pr-2 pb-1">Points: <strong>{player.total_points}</strong></p>
                   </a>
                 </div>
               </Link>
