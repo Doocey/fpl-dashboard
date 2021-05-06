@@ -8,7 +8,7 @@ import { tweetPriceChanges } from '../../../util/postPriceChangeTweet'
 export default async (req, res) => {
     await tweetPriceChanges()
     try {
-        res.status(200).send('Tweet Attempted')
+        res.status(200).send({ data: 'Tweet Attempted' })
     } catch (error) {
         res.status(404).json({ found: 'Nothing at all!' })
     }

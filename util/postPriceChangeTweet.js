@@ -8,7 +8,13 @@
 import { TwitterClient } from 'twitter-api-client'
 import { connectToDatabase } from './mongodb'
 
-const { TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET, MONGODB_PRICE_CHANGES_COLLECTION } = process.env
+const { 
+  TWITTER_CONSUMER_KEY, 
+  TWITTER_CONSUMER_SECRET, 
+  TWITTER_ACCESS_TOKEN, 
+  TWITTER_ACCESS_TOKEN_SECRET, 
+  MONGODB_PRICE_CHANGES_COLLECTION 
+} = process.env
 
 const twitterClient = new TwitterClient({
   apiKey: TWITTER_CONSUMER_KEY,
@@ -23,16 +29,19 @@ export async function tweetPriceChanges() {
     var tweet_string_risers = ''
 
     const { db } = await connectToDatabase();
+
+    // Look up Price Changes Collection by current date, if it returns empty, exit
     const daily_changes = await db.collection(MONGODB_PRICE_CHANGES_COLLECTION)
-      .find({})
+      .find({
+        date: new Date().toDateString()
+      })
       .limit(1)
       .sort({ _id: -1 })
       .toArray()
 
-    // Exit if there aren't any changes
-    if(daily_changes[0].risers.length === 0 && daily_changes[0].fallers.length === 0 ) {
-      return 'No Changes'
-    } 
+    if(daily_changes.length === 0) {
+      return 'No price changes today'
+    }
 
     daily_changes.forEach(dc => {
       dc.fallers 
