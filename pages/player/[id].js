@@ -71,7 +71,7 @@ export default function Player({ data: { player } }) {
   )
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
 
   const client = new ApolloClient({
     uri: 'https://graphql-fpl.herokuapp.com',
@@ -104,6 +104,21 @@ export async function getServerSideProps({ params }) {
   return {
     props: {
       data
-    }
+    },
+    revalidate: 30
   }
+}
+
+export async function getStaticPaths() {
+  // Call an external API endpoint to get posts
+  const players = await getLivePlayerPrices()
+
+  // Get the paths we want to pre-render based on posts
+  const paths = players.map((player) => ({
+    params: { id: player.id.toString() },
+  }))
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false }
 }
