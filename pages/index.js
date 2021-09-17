@@ -54,7 +54,7 @@ export async function getStaticProps() {
    */
   
   const res = await getLivePlayerPrices()
-  const players = res.filter(player => !(player.status === 'u') && player.total_points > 100)
+  const players = res.filter(player => !(player.status === 'u') && player.total_points > 20)
   return {
     props: {
       players
