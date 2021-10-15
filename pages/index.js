@@ -8,7 +8,19 @@ export default function Home({ players }) {
       <Head>
         <title>Fantasy Premier League Dashboard - Price Changes & Game Stats.</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="Daily FPL Price Changes & player statistics for the 2020/21 season."/>
+        <meta name="description" content="Daily FPL Price Changes & player statistics for the 2021/22 season."/>
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://fpldashboard.dev/" />
+        <meta property="og:title" content="Fantasy Premier League Dashboard - Price Changes & Game Stats." />
+        <meta property="og:description" content="Daily FPL Price Changes & player statistics for the 2021/22 season." />
+        <meta property="og:image" content="https://fpldashboard.dev/fpl-price-changes.png" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://fpldashboard.dev/" />
+        <meta property="twitter:title" content="Fantasy Premier League Dashboard - Price Changes & Game Stats." />
+        <meta property="twitter:description" content="Daily FPL Price Changes & player statistics for the 2021/22 season." />
+        <meta property="twitter:image" content="https://fpldashboard.dev/fpl-price-changes.png" />
       </Head>
 
       <main className="py-4">
@@ -54,7 +66,7 @@ export async function getStaticProps() {
    */
   
   const res = await getLivePlayerPrices()
-  const players = res.filter(player => !(player.status === 'u') && player.total_points > 20)
+  const players = res.filter(player => !(player.status === 'u') && player.total_points > 40)
   return {
     props: {
       players
