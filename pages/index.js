@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
+
 import { getLivePlayerPrices } from '../util/getLivePlayerPrices'
 
 export default function Home({ players }) {
@@ -41,11 +43,19 @@ export default function Home({ players }) {
             .sort((a, b) => a.total_points < b.total_points)
             .map((player) =>
               <Link href={'/player/' + (player.id).toString()} key={(player.id).toString()}>
-                <div className="w-1/2 md:w-1/5 h-100">
-                  <a className="block bg-gray border-2 border-gray-200 shadow-sm m-1 p-3 md:p-5">
+                <div className="w-1/2 sm:w-1/3 md:w-1/6 h-100 cursor-pointer">
+                  <a className="block bg-gray border-2 border-gray-200 shadow-sm m-1 p-3 md:px-3 text-center">
+                    <Image
+                      src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace('.jpg', '.png')}`}
+                      alt={player.web_name}
+                      width={106}
+                      height={130}
+                      className="w-full"
+                    /> 
                     <h4 className="text-xl font-semibold">{player.web_name}</h4>
                     <h5 className="font-semibold text-green-700 py-1">£{(player.now_cost / 10).toFixed(1)}m</h5>
-                    <code className="text-sm">ID: {player.id}</code>
+                    <h6>Points: {player.total_points}</h6>
+                    <code className="text-xs">ID: {player.id}</code>
                   </a>
                 </div>
               </Link>
@@ -66,7 +76,7 @@ export async function getStaticProps() {
    */
   
   const res = await getLivePlayerPrices()
-  const players = res.filter(player => !(player.status === 'u') && player.total_points > 40)
+  const players = res.filter(player => !(player.status === 'u') && player.total_points > 75)
   return {
     props: {
       players
