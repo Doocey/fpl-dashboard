@@ -3,25 +3,25 @@ import Image from 'next/image'
 
 export default function FourOhFour() {
   return (
-    <div className="container">
+    <>
       <Head>
         <title>Nothing Here</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Nothing found" />
       </Head>
-
-      <main>
-        <h1>Nowt Found For That</h1>
-        <Image
-          src='/lucy.jpg'
-          alt={`Page not found, but here's a nice dog`}
-          width='1500'
-          height='500'
-          className='nf-image'
-        />
-
-        <p>Nothing found for that page.....but here's a picture of my dog enjoying the beach to cheer you up.</p>
-      </main>
-    </div>
+      <Image
+        src='/lucy.jpg'
+        alt={`Page not found, but here's a nice dog`}
+        width='1500'
+        height='500'
+        className='nf-image'
+      />
+      <div className="container py-5">
+        <main className="w-11/12 sm:w-8/12 mx-auto">
+          <h1 className="text-3xl pb-4">Nowt Found For That</h1>
+          <p>Nothing found for that page.....but here's a picture of my dog Lucy enjoying the beach to cheer you up.</p>
+        </main>
+      </div>
+    </>
   )
 }
