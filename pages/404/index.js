@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import Image from 'next/image'
 
-export default function FourOhFour(props) {
+export default function FourOhFour() {
   return (
     <div className="container">
       <Head>
         <title>Nothing Here</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="Nothing found"/>
+        <meta name="description" content="Nothing found" />
       </Head>
 
       <main>

@@ -8,12 +8,12 @@
 import { TwitterClient } from 'twitter-api-client'
 import { connectToDatabase } from './mongodb'
 
-const { 
-  TWITTER_CONSUMER_KEY, 
-  TWITTER_CONSUMER_SECRET, 
-  TWITTER_ACCESS_TOKEN, 
-  TWITTER_ACCESS_TOKEN_SECRET, 
-  MONGODB_PRICE_CHANGES_COLLECTION 
+const {
+  TWITTER_CONSUMER_KEY,
+  TWITTER_CONSUMER_SECRET,
+  TWITTER_ACCESS_TOKEN,
+  TWITTER_ACCESS_TOKEN_SECRET,
+  MONGODB_PRICE_CHANGES_COLLECTION
 } = process.env
 
 const twitterClient = new TwitterClient({
@@ -39,28 +39,28 @@ export async function tweetPriceChanges() {
       .sort({ _id: -1 })
       .toArray()
 
-    if(daily_changes.length === 0) {
+    if (daily_changes.length === 0) {
       return 'No price changes today'
     }
 
     daily_changes.forEach(dc => {
-      dc.fallers 
+      dc.fallers
         ? dc.fallers
           .forEach(f => tweet_string_fallers += `\n${f.short_name} - £${(f.new_price / 10).toFixed(1)}m 🔻`)
         : ''
-      dc.risers 
+      dc.risers
         ? dc.risers
           .forEach(r => tweet_string_risers += `\n${r.short_name} - £${(r.new_price / 10).toFixed(1)}m 🔼`)
         : ''
     })
 
     // Send off Price Risers & Fallers, if there's any of them!
-    if(tweet_string_fallers.length > 0) {
+    if (tweet_string_fallers.length > 0) {
       tweet_string_fallers = '#FPL Price Fallers: \n' + tweet_string_fallers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
       var tweetedFallers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_fallers });
     }
 
-    if(tweet_string_risers.length > 0) {
+    if (tweet_string_risers.length > 0) {
       tweet_string_risers = '#FPL Price Risers: \n' + tweet_string_risers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
       var tweetedRisers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_risers });
     }
