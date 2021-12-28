@@ -10,7 +10,7 @@ export default function PriceChanges({ prices }) {
     <section className="mx-auto container my-4">
       <Head>
         <title>Fantasy Premier League Price Changes</title>
-        <meta name="description" content="FPL Price Changes updated daily. Keep track of weekly price movers to help improve your game."/>
+        <meta name="description" content="FPL Price Changes updated daily. Keep track of weekly price movers to help improve your game." />
 
         <meta name="title" content="Fantasy Premier League Price Changes" />
 
@@ -44,21 +44,21 @@ export default function PriceChanges({ prices }) {
         {price_changes_week.map((pc) => (
           <div className="w-100 md:w-3/4 mx-auto mb-5" key={pc._id}>
             <h2 className="text-2xl font-bold text-center pt-4 pb-3 text-gray-800">{new Date(pc._id).toDateString()}:</h2>
-              <table className="w-full lg:w-4/5 mx-auto shadow-lg border-b border-gray-200 sm:rounded-lg">
-                <thead className="bg-gray-200 text-gray-500">
-                  <tr>
-                    <th className="px-4 sm:px-5 py-3 text-left text-xs uppercase tracking-wider">
-                      Player
-                    </th>
-                    <th className="px-2 sm:px-4 py-3 text-left text-xs uppercase tracking-wider">
-                      New Price:
-                    </th>
-                    <th className="px-2 sm:px-4 py-3 text-left text-xs uppercase tracking-wider">
-                      Owned By:
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+            <table className="w-full lg:w-4/5 mx-auto shadow-lg border-b border-gray-200 sm:rounded-lg">
+              <thead className="bg-gray-200 text-gray-500">
+                <tr>
+                  <th className="px-4 sm:px-5 py-3 text-left text-xs uppercase tracking-wider">
+                    Player
+                  </th>
+                  <th className="px-2 sm:px-4 py-3 text-left text-xs uppercase tracking-wider">
+                    New Price:
+                  </th>
+                  <th className="px-2 sm:px-4 py-3 text-left text-xs uppercase tracking-wider">
+                    Owned By:
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
                 {pc.risers
                   ? pc.risers.map((p) => (
                     <tr className="bg-green-700 text-green-800" key={p._id}>
@@ -76,7 +76,7 @@ export default function PriceChanges({ prices }) {
                         </span>
                       </td>
                     </tr>
-                    ))
+                  ))
                   : ""}
 
                 {pc.fallers
@@ -88,7 +88,7 @@ export default function PriceChanges({ prices }) {
                         </Link>
                       </td>
                       <td className="px-4 sm:px-6 py-3 text-md text-white font-medium">
-                          £{(p.new_price / 10).toFixed(1)}m
+                        £{(p.new_price / 10).toFixed(1)}m
                       </td>
                       <td className="px-4 sm:px-6 py-3">
                         <span className="px-2 sm:px-2 inline-flex text-xs sm:text-sm leading-5 sm:leading-7 font-semibold rounded-full bg-red-100 text-red-800">
@@ -96,10 +96,10 @@ export default function PriceChanges({ prices }) {
                         </span>
                       </td>
                     </tr>
-                    ))
+                  ))
                   : ""}
-                </tbody>
-              </table>
+              </tbody>
+            </table>
           </div>
         ))}
       </main>

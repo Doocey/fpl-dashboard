@@ -10,7 +10,7 @@ export default function Home({ players }) {
       <Head>
         <title>Fantasy Premier League Dashboard - Price Changes & Game Stats.</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="Daily FPL Price Changes & player statistics for the 2021/22 season."/>
+        <meta name="description" content="Daily FPL Price Changes & player statistics for the 2021/22 season." />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fpldashboard.dev/" />
@@ -51,7 +51,7 @@ export default function Home({ players }) {
                       width={106}
                       height={130}
                       className="w-full"
-                    /> 
+                    />
                     <h4 className="text-xl font-semibold">{player.web_name}</h4>
                     <h5 className="font-semibold text-green-700 py-1">£{(player.now_cost / 10).toFixed(1)}m</h5>
                     <h6>Points: {player.total_points}</h6>
@@ -59,8 +59,8 @@ export default function Home({ players }) {
                   </a>
                 </div>
               </Link>
-            )} 
-        </div>        
+            )}
+        </div>
       </main>
     </div>
   )
@@ -74,7 +74,7 @@ export async function getStaticProps() {
    * Only active players in the FPL will be included and further reduces the size
    * of data we pass through to component
    */
-  
+
   const res = await getLivePlayerPrices()
   const players = res.filter(player => !(player.status === 'u') && player.total_points > 75)
   return {

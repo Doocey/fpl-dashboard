@@ -12,10 +12,10 @@ class MyDocument extends Document {
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-TKX4WQW');`,
           }}>
-        </script>
+          </script>
         </Head>
         <body>
-          <noscript dangerouslySetInnerHTML={{__html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKX4WQW" height="0" width="0" style="display:none;visibility:hidden"></iframe>`}} />
+          <noscript dangerouslySetInnerHTML={{ __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKX4WQW" height="0" width="0" style="display:none;visibility:hidden"></iframe>` }} />
           <Main />
           <NextScript />
         </body>
