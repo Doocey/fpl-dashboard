@@ -1,10 +1,9 @@
 import Head from 'next/head'
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import { getLivePlayerPrices } from '../../util/getLivePlayerPrices'
 import PlayerProfile from '../../components/PlayerProfile';
 
 // Extract player object from data in 'props
-export default function Player({ data: { player } }) {
+export default function Player({ player }) {
   // Form the player's full name using string concat method this time - could have constructed different ways, but trying this out
   const meta_description = `Fantasy League profile for ${player.team.name}'s ${player.first_name.concat(' ', player.second_name)}`
   // Form player profile photo
@@ -29,38 +28,14 @@ export default function Player({ data: { player } }) {
 }
 
 export async function getStaticProps({ params }) {
+  const all_players = await getLivePlayerPrices()
 
-  const client = new ApolloClient({
-    uri: process.env.FPL_GRAPHQL_URL,
-    cache: new InMemoryCache()
-  });
-
-  const { data } = await client.query({
-    query: gql`
-      query {
-        player(id: ${params.id}) {
-          first_name
-          second_name
-          goals_scored
-          now_cost
-          total_points
-          transfers_in_event
-          transfers_out_event
-          selected_by_percent
-          web_name
-          photo
-          news
-          team {
-            name
-          }
-        }
-      }    
-    `
-  });
+  // Find Player from list of player based on {params} id, which we need to turn into a string
+  const player = all_players.find(player => player.id == params.id.toString())
 
   return {
     props: {
-      data
+      player
     },
     revalidate: 30
   }
@@ -70,7 +45,7 @@ export async function getStaticPaths() {
   // Call an external API endpoint to get posts
   const players = await getLivePlayerPrices()
 
-  // Get the paths we want to pre-render based on posts
+  // Get the paths we want to pre-render based on posts, needs to be string
   const paths = players.map((player) => ({
     params: { id: player.id.toString() },
   }))
