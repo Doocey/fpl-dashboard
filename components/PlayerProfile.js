@@ -39,12 +39,12 @@ export default function PlayerProfile({ props }) {
             GW Net Transfers:
             {
               (props.transfers_in_event - props.transfers_out_event) > 0
-                ? <span className="ml-4 bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-green-50">{props.transfers_in_event - props.transfers_out_event}</span>
-                : <span className="ml-4 bg-red-600 rounded-full px-3 py-1 text-sm font-semibold text-red-50">{props.transfers_in_event - props.transfers_out_event}</span>
+                ? <span className="ml-4 bg-green-700 rounded-full px-3 py-1 text-sm font-semibold text-green-50">{props.transfers_in_event - props.transfers_out_event}</span>
+                : <span className="ml-4 bg-red-700 rounded-full px-3 py-1 text-sm font-semibold text-red-50">{props.transfers_in_event - props.transfers_out_event}</span>
             }
           </p>
         </div>
-        {props.news.length ? <mark className="block p-2 leading-relaxed bg-red-500 text-white text-sm">🚨 {props.news}</mark> : ''}
+        {props.news.length ? <mark className="block p-2 leading-relaxed bg-red-600 text-white text-sm">🚨 {props.news}</mark> : ''}
       </div>
     </div>
   )

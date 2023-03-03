@@ -61,14 +61,14 @@ export default function PriceChanges({ prices }) {
               <tbody className="bg-white divide-y divide-gray-200">
                 {pc.risers
                   ? pc.risers.map((p) => (
-                    <tr className="bg-green-700 text-green-800" key={p._id}>
+                    <tr className="bg-green-800 text-green-800" key={p._id}>
                       <td className="px-4 sm:px-6 py-3 text-md text-white font-medium">
                         <Link href={`/player/${p.id}`}>
                           <a>{p.short_name}</a>
                         </Link>
                       </td>
                       <td className="px-4 sm:px-6 py-3 text-md text-white font-medium">
-                        £{(p.new_price / 10).toFixed(1)}m
+                        &pound;{(p.new_price / 10).toFixed(1)}m
                       </td>
                       <td className="px-4 sm:px-6 py-3">
                         <span className="px-2 sm:px-2 inline-flex text-xs sm:text-sm leading-5 sm:leading-7 font-semibold rounded-full bg-green-100 text-green-800">
@@ -81,14 +81,14 @@ export default function PriceChanges({ prices }) {
 
                 {pc.fallers
                   ? pc.fallers.map((p) => (
-                    <tr className="bg-red-600 text-red-800">
+                    <tr className="bg-red-700 text-red-800" key={p.id}>
                       <td className="px-4 sm:px-6 py-3 text-md font-medium text-white">
                         <Link href={`/player/${p.id}`}>
                           <a>{p.short_name}</a>
                         </Link>
                       </td>
                       <td className="px-4 sm:px-6 py-3 text-md text-white font-medium">
-                        £{(p.new_price / 10).toFixed(1)}m
+                        &pound;{(p.new_price / 10).toFixed(1)}m
                       </td>
                       <td className="px-4 sm:px-6 py-3">
                         <span className="px-2 sm:px-2 inline-flex text-xs sm:text-sm leading-5 sm:leading-7 font-semibold rounded-full bg-red-100 text-red-800">

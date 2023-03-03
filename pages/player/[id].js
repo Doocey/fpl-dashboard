@@ -10,7 +10,7 @@ export default function Player({ player }) {
   const player_image = `https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace('.jpg', '.png')}`
 
   return (
-    <div>
+    <>
       <Head>
         <title>{player.web_name}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -23,7 +23,7 @@ export default function Player({ player }) {
           <PlayerProfile props={player} />
         </div>
       </main>
-    </div>
+    </>
   )
 }
 

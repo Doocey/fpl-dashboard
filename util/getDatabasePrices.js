@@ -11,7 +11,7 @@ export async function getDatabasePrices() {
         .toArray()
       return players
     } catch (error) {
-      console.log('Something went wrong: ' + error)
+      console.log('Something went wrong', error)
     }
   }
 }

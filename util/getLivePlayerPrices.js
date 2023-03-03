@@ -23,6 +23,6 @@ export async function getLivePlayerPrices() {
       });
     return players
   } catch (error) {
-    console.log('Something went wrong: ' + error)
+    console.log('Something went wrong', error)
   }
 }

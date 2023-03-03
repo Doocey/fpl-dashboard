@@ -53,7 +53,7 @@ export default function Home({ players }) {
                       className="w-full"
                     />
                     <h4 className="text-xl font-semibold">{player.web_name}</h4>
-                    <h5 className="font-semibold text-green-700 py-1">£{(player.now_cost / 10).toFixed(1)}m</h5>
+                    <h5 className="font-semibold text-green-700 py-1">&pound;{(player.now_cost / 10).toFixed(1)}m</h5>
                     <h6>Points: {player.total_points}</h6>
                     <code className="text-xs">ID: {player.id}</code>
                   </a>
@@ -73,10 +73,11 @@ export async function getStaticProps() {
    * that do not have a status of 'u' - meaning unavailable
    * Only active players in the FPL will be included and further reduces the size
    * of data we pass through to component
+   * Limit to first 20 for sanity sake
    */
 
   const res = await getLivePlayerPrices()
-  const players = res.filter(player => !(player.status === 'u') && player.total_points > 10)
+  const players = res.filter(player => !(player.status === 'u') && player.total_points > 100).slice(0, 20)
   return {
     props: {
       players
