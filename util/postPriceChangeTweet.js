@@ -5,7 +5,7 @@
  * TODO: Can I clean this up futher and optimize the execution?
  */
 
-import { TwitterClient } from 'twitter-api-client'
+import { TwitterApi } from 'twitter-api-v2';
 import { connectToDatabase } from './mongodb'
 
 const {
@@ -16,19 +16,19 @@ const {
   MONGODB_PRICE_CHANGES_COLLECTION
 } = process.env
 
-const twitterClient = new TwitterClient({
-  apiKey: TWITTER_CONSUMER_KEY,
-  apiSecret: TWITTER_CONSUMER_SECRET,
+const twitterClient = new TwitterApi({
+  appKey: TWITTER_CONSUMER_KEY,
+  appSecret: TWITTER_CONSUMER_SECRET,
   accessToken: TWITTER_ACCESS_TOKEN,
-  accessTokenSecret: TWITTER_ACCESS_TOKEN_SECRET
-})
+  accessSecret: TWITTER_ACCESS_TOKEN_SECRET,
+});
 
 export async function tweetPriceChanges() {
   try {
-    var tweet_string_fallers = ''
-    var tweet_string_risers = ''
-
     const { db } = await connectToDatabase();
+
+    let tweet_string_fallers = ''
+    let tweet_string_risers = ''
 
     // Look up Price Changes Collection by current date, if it returns empty, exit
     const daily_changes = await db.collection(MONGODB_PRICE_CHANGES_COLLECTION)
@@ -39,9 +39,7 @@ export async function tweetPriceChanges() {
       .sort({ _id: -1 })
       .toArray()
 
-    if (daily_changes.length === 0) {
-      return 'No price changes today'
-    }
+    if (daily_changes.length === 0) return 'No price changes today'
 
     daily_changes.forEach(dc => {
       dc.fallers
@@ -57,15 +55,25 @@ export async function tweetPriceChanges() {
     // Send off Price Risers & Fallers, if there's any of them!
     if (tweet_string_fallers.length > 0) {
       tweet_string_fallers = '#FPL Price Fallers: \n' + tweet_string_fallers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
-      var tweetedFallers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_fallers });
+
+      const { data } = await twitterClient.v2.tweet({
+        text: tweet_string_fallers,
+      });
+
+      return data?.id
     }
 
     if (tweet_string_risers.length > 0) {
       tweet_string_risers = '#FPL Price Risers: \n' + tweet_string_risers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
-      var tweetedRisers = await twitterClient.tweets.statusesUpdate({ status: tweet_string_risers });
+
+      const { data } = await twitterClient.v2.tweet({
+        text: tweet_string_risers,
+      });
+
+      return data?.id
     }
     /** TODO: Can I optimize this code to be more efficient? */
-    return [tweetedFallers, tweetedRisers]
+    return daily_changes?.length
   } catch (error) {
     return error
   }

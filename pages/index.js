@@ -10,18 +10,18 @@ export default function Home({ players }) {
       <Head>
         <title>Fantasy Premier League Dashboard - Price Changes & Game Stats.</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="Daily FPL Price Changes & player statistics for the 2022/23 season." />
+        <meta name="description" content="Daily FPL Price Changes & player statistics for the 2023/24 season." />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://fpldashboard.dev/" />
         <meta property="og:title" content="Fantasy Premier League Dashboard - Price Changes & Game Stats." />
-        <meta property="og:description" content="Daily FPL Price Changes & player statistics for the 2022/23 season." />
+        <meta property="og:description" content="Daily FPL Price Changes & player statistics for the 2023/24 season." />
         <meta property="og:image" content="https://fpldashboard.dev/fpl-price-changes.png" />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://fpldashboard.dev/" />
         <meta property="twitter:title" content="Fantasy Premier League Dashboard - Price Changes & Game Stats." />
-        <meta property="twitter:description" content="Daily FPL Price Changes & player statistics for the 2022/23 season." />
+        <meta property="twitter:description" content="Daily FPL Price Changes & player statistics for the 2023/24 season." />
         <meta property="twitter:image" content="https://fpldashboard.dev/fpl-price-changes.png" />
       </Head>
 
@@ -31,9 +31,8 @@ export default function Home({ players }) {
         </h1>
 
         <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-4">
-          A list of all currently <em>available</em> players that have scored at least 100 points, with their unique idenifier.
+          A list of all currently <em>available</em> top 15 scoring players, with their unique idenifier.
           Anyone not on the list is out on loan, has left the club permanently, or has not made their club's registered squad list.
-          Sorted by highest scoring players on the game.
         </p>
 
         <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-6">Each tile should route you to a specific player profile - using <span className="underline">Next.js'</span> Dynamic Routing.</p>
@@ -77,7 +76,7 @@ export async function getStaticProps() {
    */
 
   const res = await getLivePlayerPrices()
-  const players = res.filter(player => !(player.status === 'u') && player.total_points > 100).slice(0, 20)
+  const players = res.sort((player, nextPlayer) => nextPlayer.total_points - player.total_points)?.filter(player => player.total_points > 30).slice(0, 15)
   return {
     props: {
       players
