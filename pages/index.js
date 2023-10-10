@@ -31,9 +31,8 @@ export default function Home({ players }) {
         </h1>
 
         <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-4">
-          A list of all currently <em>available</em> players that have scored at least 100 points, with their unique idenifier.
+          A list of all currently <em>available</em> top 15 scoring players, with their unique idenifier.
           Anyone not on the list is out on loan, has left the club permanently, or has not made their club's registered squad list.
-          Sorted by highest scoring players on the game.
         </p>
 
         <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-6">Each tile should route you to a specific player profile - using <span className="underline">Next.js'</span> Dynamic Routing.</p>
@@ -77,7 +76,7 @@ export async function getStaticProps() {
    */
 
   const res = await getLivePlayerPrices()
-  const players = res.filter(player => !(player.status === 'u') && player.total_points > 30).slice(0, 20)
+  const players = res.sort((player, nextPlayer) => nextPlayer.total_points - player.total_points)?.filter(player => player.total_points > 30).slice(0, 15)
   return {
     props: {
       players
