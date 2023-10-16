@@ -56,24 +56,20 @@ export async function tweetPriceChanges() {
     if (tweet_string_fallers.length > 0) {
       tweet_string_fallers = '#FPL Price Fallers: \n' + tweet_string_fallers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
 
-      const { data } = await twitterClient.v2.tweet({
+      var tweetedFallers = await twitterClient.v2.tweet({
         text: tweet_string_fallers,
       });
-
-      return data?.id
     }
 
     if (tweet_string_risers.length > 0) {
       tweet_string_risers = '#FPL Price Risers: \n' + tweet_string_risers + '\n\n#FPLPriceChanges #FPLCommunity #FPL'
 
-      const { data } = await twitterClient.v2.tweet({
+      var tweetedRisers = await twitterClient.v2.tweet({
         text: tweet_string_risers,
       });
-
-      return data?.id
     }
     /** TODO: Can I optimize this code to be more efficient? */
-    return daily_changes?.length
+    return [tweetedFallers, tweetedRisers]
   } catch (error) {
     return error
   }
