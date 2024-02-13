@@ -29,52 +29,52 @@ export async function getPriceChanges() {
         now_cost !== db_players.find(({ _id }) => _id === id)?.price
     );
 
-    if (db_players_pending_change.length === 0) return "No price changes today";
+    if (db_players_pending_change.length) {
+      const risers = [];
+      const fallers = [];
 
-    const risers = [];
-    const fallers = [];
+      db_players_pending_change.forEach((player) => {
+        const single_player = db_players.find(({ _id }) => _id === player.id);
 
-    db_players_pending_change.forEach((player) => {
-      const single_player = db_players.find(({ _id }) => _id === player.id);
+        if (
+          player.now_cost > single_player.price ||
+          player.now_cost < single_player.price
+        ) {
+          (player.now_cost > single_player.price ? risers : fallers).push({
+            id: player.id,
+            first_name: player.first_name,
+            second_name: player.second_name,
+            short_name: player.web_name,
+            old_price: single_player.price,
+            new_price: player.now_cost,
+            percentage_ownership: player.selected_by_percent
+          });
+        }
+      });
 
-      if (
-        player.now_cost > single_player.price ||
-        player.now_cost < single_player.price
-      ) {
-        (player.now_cost > single_player.price ? risers : fallers).push({
-          id: player.id,
-          first_name: player.first_name,
-          second_name: player.second_name,
-          short_name: player.web_name,
-          old_price: single_player.price,
-          new_price: player.now_cost,
-          percentage_ownership: player.selected_by_percent
-        });
-      }
-    });
+      // Update DB prices to reflect players new price, use bulkWrite for better perf
+      await db
+        .collection(TEST_MONGODB_PRICE_COLLECTION)
+        .bulkWrite(
+          db_players_pending_change.map(({ now_cost, id }) => {
+            return {
+              updateOne: {
+                filter: { _id: id },
+                update: { $set: { price: now_cost } }
+              }
+            };
+          })
+        )
+        .catch((err) => err);
 
-    // Update DB prices to reflect players new price, use bulkWrite for better perf
-    await db
-      .collection(TEST_MONGODB_PRICE_COLLECTION)
-      .bulkWrite(
-        db_players_pending_change.map(({ now_cost, id }) => {
-          return {
-            updateOne: {
-              filter: { _id: id },
-              update: { $set: { price: now_cost } }
-            }
-          };
-        })
-      )
-      .catch((err) => err);
-
-    // Add record in our daily changes table with any changes
-    await db.collection(TEST_MONGODB_PRICE_CHANGES_COLLECTION).insertOne({
-      _id: new Date(),
-      date: new Date().toDateString(),
-      fallers: fallers,
-      risers: risers
-    });
+      // Add record in our daily changes table with any changes
+      await db.collection(TEST_MONGODB_PRICE_CHANGES_COLLECTION).insertOne({
+        _id: new Date(),
+        date: new Date().toDateString(),
+        fallers: fallers,
+        risers: risers
+      });
+    }
 
     // Render the 7 most recent days of price changes
     const daily_changes = await db
