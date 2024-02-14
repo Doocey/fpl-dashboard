@@ -1,7 +1,7 @@
 import { connectToDatabase } from "./mongodb";
 import { getLivePlayerPrices } from "./getLivePlayerPrices";
 
-const { TEST_MONGODB_PRICE_COLLECTION, TEST_MONGODB_PRICE_CHANGES_COLLECTION } =
+const { MONGODB_PRICE_COLLECTION, MONGODB_PRICE_CHANGES_COLLECTION } =
   process.env;
 
 export async function getPriceChanges() {
@@ -17,7 +17,7 @@ export async function getPriceChanges() {
 
     // Crossmatch players_with_changes with players from our own DB
     const db_players = await db
-      .collection(TEST_MONGODB_PRICE_COLLECTION)
+      .collection(MONGODB_PRICE_COLLECTION)
       .find({
         _id: { $in: players_with_changes.map((player) => player.id) }
       })
@@ -54,7 +54,7 @@ export async function getPriceChanges() {
 
       // Update DB prices to reflect players new price, use bulkWrite for better perf
       await db
-        .collection(TEST_MONGODB_PRICE_COLLECTION)
+        .collection(MONGODB_PRICE_COLLECTION)
         .bulkWrite(
           db_players_pending_change.map(({ now_cost, id }) => {
             return {
@@ -68,7 +68,7 @@ export async function getPriceChanges() {
         .catch((err) => err);
 
       // Add record in our daily changes table with any changes
-      await db.collection(TEST_MONGODB_PRICE_CHANGES_COLLECTION).insertOne({
+      await db.collection(MONGODB_PRICE_CHANGES_COLLECTION).insertOne({
         _id: new Date(),
         date: new Date().toDateString(),
         fallers: fallers,
@@ -78,7 +78,7 @@ export async function getPriceChanges() {
 
     // Render the last 7 days of price changes
     const daily_changes = await db
-      .collection(TEST_MONGODB_PRICE_CHANGES_COLLECTION)
+      .collection(MONGODB_PRICE_CHANGES_COLLECTION)
       .find({})
       .limit(7)
       .sort({ _id: -1 })
