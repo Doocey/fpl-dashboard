@@ -29,7 +29,7 @@ export async function getNewPlayers() {
 
     if (newly_added_players.length) {
       await db
-        .collection(TEST_MONGODB_PRICE_COLLECTION)
+        .collection(MONGODB_PRICE_COLLECTION)
         .insertMany(newly_added_players);
 
       return `${newly_added_players.length} newly added`;
