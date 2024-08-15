@@ -1,17 +1,17 @@
-const { configureSitemap } = require('@sergeymyssak/nextjs-sitemap');
+const { configureSitemap } = require("@sergeymyssak/nextjs-sitemap");
 
 const Sitemap = configureSitemap({
-  baseUrl: 'https://fpldashboard.dev',
-  exclude: ['/api/*', '/404/', '/player/*'],
+  baseUrl: "https://fpldashboard.dev",
+  exclude: ["/api/*", "/404/", "/player/*"],
   excludeIndex: true,
   pagesConfig: {
-    '/price-changes': {
-      priority: '0.9',
-      changefreq: 'daily',
-    },
+    "/price-changes": {
+      priority: "0.9",
+      changefreq: "daily"
+    }
   },
   isTrailingSlashRequired: false,
-  targetDirectory: __dirname + '/public',
-  pagesDirectory: __dirname + '/pages',
+  targetDirectory: __dirname + "/public",
+  pagesDirectory: __dirname + "/pages"
 });
 Sitemap.generateSitemap();

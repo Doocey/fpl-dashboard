@@ -86,7 +86,7 @@ export default function Home({ players }) {
                       className="w-full"
                     />
                     <h4 className="text-xl font-semibold">{player.web_name}</h4>
-                    <h5 className="font-semibold text-green-700 py-1">
+                    <h5 className="font-semibold text-emerald-600 py-1">
                       &pound;{(player.now_cost / 10).toFixed(1)}m
                     </h5>
                     <h6>Points: {player.total_points}</h6>

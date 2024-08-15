@@ -1,5 +1,5 @@
-import { connectToDatabase } from '../util/mongodb'
-const { MONGODB_PRICE_COLLECTION } = process.env
+import { connectToDatabase } from "../util/mongodb";
+const { MONGODB_PRICE_COLLECTION } = process.env;
 
 export async function getDatabasePrices() {
   const { db } = await connectToDatabase();
@@ -8,10 +8,10 @@ export async function getDatabasePrices() {
       const players = await db
         .collection(MONGODB_PRICE_COLLECTION)
         .find({})
-        .toArray()
-      return players
+        .toArray();
+      return players;
     } catch (error) {
-      console.log('Something went wrong', error)
+      console.log("Something went wrong", error);
     }
   }
 }
