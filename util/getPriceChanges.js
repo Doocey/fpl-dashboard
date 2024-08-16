@@ -15,6 +15,9 @@ export async function getPriceChanges() {
         player.cost_change_event > 0 || player.cost_change_event_fall > 0
     );
 
+    // exit early if no marked price changes
+    if (players_with_changes.length === 0) return "No recent price changes";
+
     // Crossmatch players_with_changes with players from our own DB
     const db_players = await db
       .collection(MONGODB_PRICE_COLLECTION)
