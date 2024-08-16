@@ -16,7 +16,7 @@ export async function getPriceChanges() {
     );
 
     // exit early if no marked price changes
-    if (players_with_changes.length === 0) return "No recent price changes";
+    if (players_with_changes.length === 0) return [];
 
     // Crossmatch players_with_changes with players from our own DB
     const db_players = await db
