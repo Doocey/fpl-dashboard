@@ -114,7 +114,6 @@ export async function getStaticProps() {
   const res = await getLivePlayerPrices();
   const players = res
     .sort((player, nextPlayer) => nextPlayer.total_points - player.total_points)
-    ?.filter((player) => player.total_points > 30)
     .slice(0, 15);
   return {
     props: {
