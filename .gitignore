@@ -31,5 +31,5 @@ yarn-error.log*
 
 # Some files I wanna keep but don't wanna store ;)
 initial-player-db-population.js
-old_index.js
-deleteADuplicateMongoEntry.js
+dummy-data.json
+dummy-changes.json
