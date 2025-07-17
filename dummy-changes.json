@@ -1,0 +1,415 @@
+[
+  {
+    "_id": "2025-07-06T14:46:50.743Z",
+    "date": "Sun Jul 06 2025",
+    "fallers": [
+      {
+        "id": 58,
+        "first_name": "Ollie",
+        "second_name": "Watkins",
+        "short_name": "Watkins",
+        "old_price": 92,
+        "new_price": 89,
+        "percentage_ownership": "26.0"
+      },
+      {
+        "id": 78,
+        "first_name": "Antoine",
+        "second_name": "Semenyo",
+        "short_name": "Semenyo",
+        "old_price": 57,
+        "new_price": 56,
+        "percentage_ownership": "4.8"
+      },
+      {
+        "id": 99,
+        "first_name": "Bryan",
+        "second_name": "Mbeumo",
+        "short_name": "Mbeumo",
+        "old_price": 83,
+        "new_price": 71,
+        "percentage_ownership": "7.7"
+      },
+      {
+        "id": 207,
+        "first_name": "Jean-Philippe",
+        "second_name": "Mateta",
+        "short_name": "Mateta",
+        "old_price": 75,
+        "new_price": 74,
+        "percentage_ownership": "4.3"
+      }
+    ],
+    "risers": [
+      {
+        "id": 9,
+        "first_name": "Gabriel",
+        "second_name": "Martinelli Silva",
+        "short_name": "Martinelli",
+        "old_price": 65,
+        "new_price": 69,
+        "percentage_ownership": "2.2"
+      },
+      {
+        "id": 28,
+        "first_name": "Leon",
+        "second_name": "Bailey",
+        "short_name": "Bailey",
+        "old_price": 62,
+        "new_price": 64,
+        "percentage_ownership": "2.4"
+      },
+      {
+        "id": 29,
+        "first_name": "Ross",
+        "second_name": "Barkley",
+        "short_name": "Barkley",
+        "old_price": 52,
+        "new_price": 53,
+        "percentage_ownership": "0.5"
+      },
+      {
+        "id": 45,
+        "first_name": "Ian",
+        "second_name": "Maatsen",
+        "short_name": "Maatsen",
+        "old_price": 45,
+        "new_price": 49,
+        "percentage_ownership": "2.7"
+      },
+      {
+        "id": 233,
+        "first_name": "Amadou",
+        "second_name": "Onana",
+        "short_name": "Onana",
+        "old_price": 48,
+        "new_price": 51,
+        "percentage_ownership": "8.1"
+      },
+      {
+        "id": 93,
+        "first_name": "Aaron",
+        "second_name": "Hickey",
+        "short_name": "Hickey",
+        "old_price": 43,
+        "new_price": 44,
+        "percentage_ownership": "0.0"
+      },
+      {
+        "id": 100,
+        "first_name": "Ben",
+        "second_name": "Mee",
+        "short_name": "Mee",
+        "old_price": 42,
+        "new_price": 44,
+        "percentage_ownership": "0.7"
+      },
+      {
+        "id": 129,
+        "first_name": "João Pedro",
+        "second_name": "Junqueira de Jesus",
+        "short_name": "João Pedro",
+        "old_price": 55,
+        "new_price": 57,
+        "percentage_ownership": "27.5"
+      },
+      {
+        "id": 148,
+        "first_name": "Danny",
+        "second_name": "Welbeck",
+        "short_name": "Welbeck",
+        "old_price": 55,
+        "new_price": 57,
+        "percentage_ownership": "14.2"
+      },
+      {
+        "id": 177,
+        "first_name": "Noni",
+        "second_name": "Madueke",
+        "short_name": "Madueke",
+        "old_price": 60,
+        "new_price": 66,
+        "percentage_ownership": "11.4"
+      },
+      {
+        "id": 181,
+        "first_name": "Christopher",
+        "second_name": "Nkunku",
+        "short_name": "Nkunku",
+        "old_price": 57,
+        "new_price": 62,
+        "percentage_ownership": "6.3"
+      },
+      {
+        "id": 195,
+        "first_name": "Chadi",
+        "second_name": "Riad Dnanou",
+        "short_name": "Chadi Riad",
+        "old_price": 43,
+        "new_price": 44,
+        "percentage_ownership": "0.1"
+      },
+      {
+        "id": 210,
+        "first_name": "Tyrick",
+        "second_name": "Mitchell",
+        "short_name": "Mitchell",
+        "old_price": 48,
+        "new_price": 49,
+        "percentage_ownership": "1.8"
+      },
+      {
+        "id": 215,
+        "first_name": "Joel",
+        "second_name": "Ward",
+        "short_name": "Ward",
+        "old_price": 43,
+        "new_price": 44,
+        "percentage_ownership": "0.1"
+      },
+      {
+        "id": 224,
+        "first_name": "Jack",
+        "second_name": "Harrison",
+        "short_name": "Harrison",
+        "old_price": 52,
+        "new_price": 54,
+        "percentage_ownership": "0.2"
+      },
+      {
+        "id": 577,
+        "first_name": "Jesper",
+        "second_name": "Lindstrøm",
+        "short_name": "Lindstrøm",
+        "old_price": 50,
+        "new_price": 53,
+        "percentage_ownership": "0.1"
+      },
+      {
+        "id": 191,
+        "first_name": "Joachim",
+        "second_name": "Andersen",
+        "short_name": "Andersen",
+        "old_price": 42,
+        "new_price": 44,
+        "percentage_ownership": "12.8"
+      },
+      {
+        "id": 240,
+        "first_name": "Andreas",
+        "second_name": "Hoelgebaum Pereira",
+        "short_name": "Andreas",
+        "old_price": 49,
+        "new_price": 54,
+        "percentage_ownership": "2.9"
+      },
+      {
+        "id": 252,
+        "first_name": "Raúl",
+        "second_name": "Jiménez",
+        "short_name": "Raúl",
+        "old_price": 53,
+        "new_price": 54,
+        "percentage_ownership": "0.4"
+      },
+      {
+        "id": 254,
+        "first_name": "Harrison",
+        "second_name": "Reed",
+        "short_name": "Reed",
+        "old_price": 47,
+        "new_price": 49,
+        "percentage_ownership": "0.0"
+      },
+      {
+        "id": 278,
+        "first_name": "Sam",
+        "second_name": "Morsy",
+        "short_name": "Morsy",
+        "old_price": 48,
+        "new_price": 49,
+        "percentage_ownership": "0.2"
+      },
+      {
+        "id": 290,
+        "first_name": "Bobby",
+        "second_name": "De Cordova-Reid",
+        "short_name": "De Cordova-Reid",
+        "old_price": 52,
+        "new_price": 54,
+        "percentage_ownership": "0.1"
+      },
+      {
+        "id": 327,
+        "first_name": "Luis",
+        "second_name": "Díaz",
+        "short_name": "Luis Díaz",
+        "old_price": 75,
+        "new_price": 76,
+        "percentage_ownership": "15.0"
+      },
+      {
+        "id": 343,
+        "first_name": "Oscar",
+        "second_name": "Bobb",
+        "short_name": "Bobb",
+        "old_price": 47,
+        "new_price": 48,
+        "percentage_ownership": "0.1"
+      },
+      {
+        "id": 351,
+        "first_name": "Erling",
+        "second_name": "Haaland",
+        "short_name": "Haaland",
+        "old_price": 149,
+        "new_price": 152,
+        "percentage_ownership": "65.7"
+      },
+      {
+        "id": 367,
+        "first_name": "Altay",
+        "second_name": "Bayindir",
+        "short_name": "Bayindir",
+        "old_price": 43,
+        "new_price": 44,
+        "percentage_ownership": "0.1"
+      },
+      {
+        "id": 378,
+        "first_name": "Kobbie",
+        "second_name": "Mainoo",
+        "short_name": "Mainoo",
+        "old_price": 52,
+        "new_price": 54,
+        "percentage_ownership": "4.9"
+      },
+      {
+        "id": 389,
+        "first_name": "Joshua",
+        "second_name": "Zirkzee",
+        "short_name": "Zirkzee",
+        "old_price": 65,
+        "new_price": 70,
+        "percentage_ownership": "3.8"
+      },
+      {
+        "id": 410,
+        "first_name": "Sean",
+        "second_name": "Longstaff",
+        "short_name": "Longstaff",
+        "old_price": 44,
+        "new_price": 49,
+        "percentage_ownership": "0.9"
+      },
+      {
+        "id": 412,
+        "first_name": "Odysseas",
+        "second_name": "Vlachodimos",
+        "short_name": "Odysseas",
+        "old_price": 42,
+        "new_price": 44,
+        "percentage_ownership": "0.1"
+      },
+      {
+        "id": 418,
+        "first_name": "Kieran",
+        "second_name": "Trippier",
+        "short_name": "Trippier",
+        "old_price": 56,
+        "new_price": 58,
+        "percentage_ownership": "7.6"
+      },
+      {
+        "id": 429,
+        "first_name": "Danilo",
+        "second_name": "dos Santos de Oliveira",
+        "short_name": "Danilo",
+        "old_price": 47,
+        "new_price": 48,
+        "percentage_ownership": "0.0"
+      },
+      {
+        "id": 434,
+        "first_name": "Callum",
+        "second_name": "Hudson-Odoi",
+        "short_name": "Hudson-Odoi",
+        "old_price": 51,
+        "new_price": 54,
+        "percentage_ownership": "2.5"
+      },
+      {
+        "id": 444,
+        "first_name": "Harry",
+        "second_name": "Toffolo",
+        "short_name": "Toffolo",
+        "old_price": 42,
+        "new_price": 44,
+        "percentage_ownership": "0.1"
+      },
+      {
+        "id": 454,
+        "first_name": "Gavin",
+        "second_name": "Bazunu",
+        "short_name": "Bazunu",
+        "old_price": 43,
+        "new_price": 44,
+        "percentage_ownership": "0.2"
+      },
+      {
+        "id": 584,
+        "first_name": "Ben",
+        "second_name": "Brereton Díaz",
+        "short_name": "Brereton Díaz",
+        "old_price": 48,
+        "new_price": 54,
+        "percentage_ownership": "0.6"
+      },
+      {
+        "id": 484,
+        "first_name": "Ben",
+        "second_name": "Davies",
+        "short_name": "Davies",
+        "old_price": 43,
+        "new_price": 44,
+        "percentage_ownership": "0.2"
+      },
+      {
+        "id": 497,
+        "first_name": "Richarlison",
+        "second_name": "de Andrade",
+        "short_name": "Richarlison",
+        "old_price": 68,
+        "new_price": 69,
+        "percentage_ownership": "0.7"
+      },
+      {
+        "id": 534,
+        "first_name": "Boubacar",
+        "second_name": "Traoré",
+        "short_name": "B.Traore",
+        "old_price": 48,
+        "new_price": 49,
+        "percentage_ownership": "0.0"
+      },
+      {
+        "id": 563,
+        "first_name": "Rodrigo",
+        "second_name": "Martins Gomes",
+        "short_name": "R.Gomes",
+        "old_price": 51,
+        "new_price": 54,
+        "percentage_ownership": "0.1"
+      },
+      {
+        "id": 564,
+        "first_name": "Santiago",
+        "second_name": "Bueno",
+        "short_name": "S.Bueno",
+        "old_price": 43,
+        "new_price": 44,
+        "percentage_ownership": "0.1"
+      }
+    ]
+  }
+]

@@ -2,6 +2,7 @@
  * Endpoint to hit to post price changes to Bluesky, if there are any.
  * Hit by cron job to automate it
  */
+import { postPriceChanges } from "../../../util/postPriceChanges";
 
 export default async (req, res) => {
   // Peform some basic auth before executing
@@ -12,7 +13,8 @@ export default async (req, res) => {
   }
 
   try {
-    res.status(200).send("Hello, Bluesky");
+    const blueskyPosts = await postPriceChanges("BLUESKY");
+    res.status(200).send(blueskyPosts);
   } catch (error) {
     res.status(500).json({ error: error });
   }

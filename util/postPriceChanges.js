@@ -4,7 +4,7 @@
  * TODO: Clean up further
  */
 
-import { connectToDatabase } from "./mongodb";
+// import { connectToDatabase } from "./mongodb";
 import { blueskyPost } from "./bluesky";
 import { sortPlayers, generateSocialPosts, formatSocialPosts } from "./helpers";
 import dummyData from "../dummy-changes.json";
@@ -24,7 +24,7 @@ export async function postPriceChanges(social) {
 
     if (daily_changes.length === 0) return "No price changes today";
 
-    const { fallers, risers } = dummyData[6];
+    const { fallers, risers } = dummyData[0];
 
     const fallersToPost = sortPlayers(fallers);
     const risersToPost = sortPlayers(risers);
