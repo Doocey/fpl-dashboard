@@ -4,10 +4,9 @@
  * TODO: Clean up further
  */
 
-// import { connectToDatabase } from "./mongodb";
+import { connectToDatabase } from "./mongodb";
 import { blueskyPost } from "./bluesky";
 import { sortPlayers, generateSocialPosts, formatSocialPosts } from "./helpers";
-import dummyData from "../dummy-changes.json";
 
 const socialPlatform = {
   BLUESKY: blueskyPost
@@ -15,16 +14,21 @@ const socialPlatform = {
 
 export async function postPriceChanges(social) {
   try {
-    // const { db } = await connectToDatabase();
+    // Grab the social platform we are to post to
+    const postToSocial = socialPlatform[social];
 
-    if (!socialPlatform[social]) return "Invalid social platform";
+    if (!postToSocial) return "Invalid social platform";
+
+    const { db } = await connectToDatabase();
 
     // Look up Price Changes Collection by current date, if it returns empty, exit
-    const daily_changes = dummyData[0];
+    const dailyChange = await db
+      .collection(process.env.MONGODB_PRICE_CHANGES_COLLECTION)
+      .findOne({ date: new Date().toDateString() }, { sort: { _id: -1 } });
 
-    if (daily_changes.length === 0) return "No price changes today";
+    if (!dailyChange) return "No price changes today";
 
-    const { fallers, risers } = dummyData[0];
+    const { fallers, risers } = dailyChange;
 
     const fallersToPost = sortPlayers(fallers);
     const risersToPost = sortPlayers(risers);
@@ -34,9 +38,6 @@ export async function postPriceChanges(social) {
 
     const posted = [];
 
-    // Grab the social platform we are to post to
-    const postToSocial = socialPlatform[social];
-
     // Send off Price Risers & Fallers, if there's any of them!
     if (fallersToPost.length) {
       const posts = formatSocialPosts(
@@ -44,11 +45,8 @@ export async function postPriceChanges(social) {
         "Fallers"
       );
 
-      if (postToSocial) {
-        console.log(`[FALLERS] Attempting to post to ${social}`, posts);
-        const result = await postToSocial(posts);
-        posted.push({ [social]: result });
-      }
+      const result = await postToSocial(posts);
+      posted.push({ [social]: result });
     }
 
     if (risersToPost.length) {
@@ -57,11 +55,8 @@ export async function postPriceChanges(social) {
         "Risers"
       );
 
-      if (postToSocial) {
-        console.log(`[RISERS] Attempting to post to ${social}`, posts);
-        const result = await postToSocial(posts);
-        posted.push({ [social]: result });
-      }
+      const result = await postToSocial(posts);
+      posted.push({ [social]: result });
     }
 
     return posted;
