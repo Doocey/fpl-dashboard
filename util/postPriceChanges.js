@@ -6,10 +6,12 @@
 
 import { connectToDatabase } from "./mongodb";
 import { blueskyPost } from "./bluesky";
+import { twitterPost } from "./twitter";
 import { sortPlayers, generateSocialPosts, formatSocialPosts } from "./helpers";
 
 const socialPlatform = {
-  BLUESKY: blueskyPost
+  BLUESKY: blueskyPost,
+  TWITTER: twitterPost
 };
 
 export async function postPriceChanges(social) {
