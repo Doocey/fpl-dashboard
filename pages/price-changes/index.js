@@ -65,7 +65,7 @@ export default function PriceChanges({ prices }) {
         <h2 className="text-center text-lg sm:text-2xl pb-4">
           Recorded price rises/falls for the past week in the FPL. <br />
           Auto-posted on Twitter{" "}
-          <Link href="https://twitter.com/PriceChangeFPL">
+          <Link href="https://twitter.com/PriceChangeFPL" legacyBehavior>
             <a className="underline">@PriceChangeFPL</a>
           </Link>
         </h2>
@@ -98,7 +98,7 @@ export default function PriceChanges({ prices }) {
                         key={p._id}
                       >
                         <td className="px-4 sm:px-6 py-3 text-md text-white font-medium">
-                          <Link href={`/player/${p.id}`}>
+                          <Link href={`/player/${p.id}`} legacyBehavior>
                             <a>{p.short_name}</a>
                           </Link>
                         </td>
@@ -118,7 +118,7 @@ export default function PriceChanges({ prices }) {
                   ? pc.fallers.map((p) => (
                       <tr className="bg-red-700 text-red-800" key={p.id}>
                         <td className="px-4 sm:px-6 py-3 text-md font-medium text-white">
-                          <Link href={`/player/${p.id}`}>
+                          <Link href={`/player/${p.id}`} legacyBehavior>
                             <a>{p.short_name}</a>
                           </Link>
                         </td>

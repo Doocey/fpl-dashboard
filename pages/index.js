@@ -72,6 +72,7 @@ export default function Home({ players }) {
               <Link
                 href={"/player/" + player.id.toString()}
                 key={player.id.toString()}
+                legacyBehavior
               >
                 <div className="w-1/2 sm:w-1/3 md:w-1/6 h-100 cursor-pointer">
                   <a className="block bg-gray border-2 border-gray-200 shadow-sm m-1 p-3 md:px-3 text-center">
