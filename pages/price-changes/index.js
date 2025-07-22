@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
-import { getPriceChanges } from "../../util/getPriceChanges";
+import { getPriceChanges } from "@/util/getPriceChanges";
 
 export default function PriceChanges({ prices }) {
   // Parse our list of price changes for the week, since it's coming through as a <string>
-  const price_changes_week = JSON.parse(prices);
+  const priceChangesWeek = JSON.parse(prices);
 
   return (
     <section className="mx-auto container my-4">
@@ -65,13 +65,13 @@ export default function PriceChanges({ prices }) {
         <h2 className="text-center text-lg sm:text-2xl pb-4">
           Recorded price rises/falls for the past week in the FPL. <br />
           Auto-posted on Twitter{" "}
-          <Link href="https://twitter.com/PriceChangeFPL" legacyBehavior>
-            <a className="underline">@PriceChangeFPL</a>
+          <Link href="https://twitter.com/PriceChangeFPL" className="underline">
+            @PriceChangeFPL
           </Link>
         </h2>
         <hr />
 
-        {price_changes_week.map((pc) => (
+        {priceChangesWeek.map((pc) => (
           <div className="w-100 md:w-3/4 mx-auto mb-5" key={pc._id}>
             <h2 className="text-2xl font-bold text-center pt-4 pb-3 text-gray-800">
               {new Date(pc._id).toDateString()}:
@@ -98,9 +98,7 @@ export default function PriceChanges({ prices }) {
                         key={p._id}
                       >
                         <td className="px-4 sm:px-6 py-3 text-md text-white font-medium">
-                          <Link href={`/player/${p.id}`} legacyBehavior>
-                            <a>{p.short_name}</a>
-                          </Link>
+                          <Link href={`/player/${p.id}`}>{p.short_name}</Link>
                         </td>
                         <td className="px-4 sm:px-6 py-3 text-md text-white font-medium">
                           &pound;{(p.new_price / 10).toFixed(1)}m
@@ -118,9 +116,7 @@ export default function PriceChanges({ prices }) {
                   ? pc.fallers.map((p) => (
                       <tr className="bg-red-700 text-red-800" key={p.id}>
                         <td className="px-4 sm:px-6 py-3 text-md font-medium text-white">
-                          <Link href={`/player/${p.id}`} legacyBehavior>
-                            <a>{p.short_name}</a>
-                          </Link>
+                          <Link href={`/player/${p.id}`}>{p.short_name}</Link>
                         </td>
                         <td className="px-4 sm:px-6 py-3 text-md text-white font-medium">
                           &pound;{(p.new_price / 10).toFixed(1)}m

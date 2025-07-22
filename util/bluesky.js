@@ -1,8 +1,6 @@
 import { AtpAgent, RichText } from "@atproto/api";
 
 export async function blueskyPost(posts) {
-  console.log("Ready to post to Bluesky", posts);
-
   try {
     const agent = new AtpAgent({
       service: "https://bsky.social"

@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
-import { getLivePlayerPrices } from "../util/getLivePlayerPrices";
+import { getLivePlayerPrices } from "@/util/getLivePlayerPrices";
 
 export default function Home({ players }) {
   return (
@@ -72,27 +72,25 @@ export default function Home({ players }) {
               <Link
                 href={"/player/" + player.id.toString()}
                 key={player.id.toString()}
-                legacyBehavior
+                className="w-1/2 sm:w-1/3 md:w-1/6 h-100 cursor-pointer"
               >
-                <div className="w-1/2 sm:w-1/3 md:w-1/6 h-100 cursor-pointer">
-                  <a className="block bg-gray border-2 border-gray-200 shadow-sm m-1 p-3 md:px-3 text-center">
-                    <Image
-                      src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace(
-                        ".jpg",
-                        ".png"
-                      )}`}
-                      alt={player.web_name}
-                      width={106}
-                      height={130}
-                      className="w-full"
-                    />
-                    <h4 className="text-xl font-semibold">{player.web_name}</h4>
-                    <h5 className="font-semibold text-emerald-600 py-1">
-                      &pound;{(player.now_cost / 10).toFixed(1)}m
-                    </h5>
-                    <h6>Points: {player.total_points}</h6>
-                    <code className="text-xs">ID: {player.id}</code>
-                  </a>
+                <div className="block bg-gray border-2 border-gray-200 shadow-sm m-1 p-3 md:px-3 text-center">
+                  <Image
+                    src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace(
+                      ".jpg",
+                      ".png"
+                    )}`}
+                    alt={player.web_name}
+                    width={106}
+                    height={130}
+                    className="w-full"
+                  />
+                  <h4 className="text-xl font-semibold">{player.web_name}</h4>
+                  <h5 className="font-semibold text-emerald-600 py-1">
+                    &pound;{(player.now_cost / 10).toFixed(1)}m
+                  </h5>
+                  <h6>Points: {player.total_points}</h6>
+                  <code className="text-xs">ID: {player.id}</code>
                 </div>
               </Link>
             ))}

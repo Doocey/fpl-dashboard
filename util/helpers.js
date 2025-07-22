@@ -37,3 +37,26 @@ export const formatSocialPosts = (items, type) => {
       : `#FPL Price ${type} (continued): \n${item}\n\n#FPLPriceChanges`
   );
 };
+
+export const teamMap = {
+  1: "ARS",
+  2: "AVL",
+  3: "BUR",
+  4: "BOU",
+  5: "BRE",
+  6: "BHA",
+  7: "CHE",
+  8: "CRY",
+  9: "EVE",
+  10: "FUL",
+  11: "LEE",
+  12: "LIV",
+  13: "MCI",
+  14: "MUN",
+  15: "NEW",
+  16: "NFO",
+  17: "SUN",
+  18: "TOT",
+  19: "WHU",
+  20: "WOL"
+};

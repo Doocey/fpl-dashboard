@@ -2,7 +2,7 @@
  * Endpoint to hit to post price changes to Bluesky, if there are any.
  * Hit by cron job to automate it
  */
-import { postPriceChanges } from "../../../util/postPriceChanges";
+import { postPriceChanges } from "@/util/postPriceChanges";
 
 export default async (req, res) => {
   // Peform some basic auth before executing

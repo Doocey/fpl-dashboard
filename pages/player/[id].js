@@ -1,15 +1,15 @@
 import Head from "next/head";
-import { getLivePlayerPrices } from "../../util/getLivePlayerPrices";
-import PlayerProfile from "../../components/PlayerProfile";
+import { getLivePlayerPrices } from "@/util/getLivePlayerPrices";
+import PlayerProfile from "@/components/PlayerProfile";
 
 // Extract player object from data in 'props
 export default function Player({ player }) {
   // Form the player's full name using string concat method this time - could have constructed different ways, but trying this out
-  const meta_description = `Fantasy League profile for ${
+  const metaDescription = `Fantasy League profile for ${
     player.team.name
   }'s ${player.first_name.concat(" ", player.second_name)}`;
   // Form player profile photo
-  const player_image = `https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace(
+  const playerImage = `https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace(
     ".jpg",
     ".png"
   )}`;
@@ -19,8 +19,8 @@ export default function Player({ player }) {
       <Head>
         <title>{player.web_name}</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content={meta_description} />
-        <meta property="og:image" content={player_image} />
+        <meta name="description" content={metaDescription} />
+        <meta property="og:image" content={playerImage} />
       </Head>
 
       <main>
@@ -33,12 +33,10 @@ export default function Player({ player }) {
 }
 
 export async function getStaticProps({ params }) {
-  const all_players = await getLivePlayerPrices();
+  const allPlayers = await getLivePlayerPrices();
 
   // Find Player from list of player based on {params} id, which we need to turn into a string
-  const player = all_players.find(
-    (player) => player.id == params.id.toString()
-  );
+  const player = allPlayers.find((player) => player.id == params.id.toString());
 
   return {
     props: {

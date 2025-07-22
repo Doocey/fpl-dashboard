@@ -3,13 +3,20 @@
  * Accesible via `/api/changes/` - returns list of 7 items from stored changes DB collection
  */
 
-import { getPriceChanges } from "../../../util/getPriceChanges";
+import { getPriceChanges } from "@/util/getPriceChanges";
 
 export default async (req, res) => {
+  // Peform some basic auth before executing
+  const secret = req.headers["x-webhook-secret"];
+
+  if (!secret || secret !== process.env.WEBHOOK_SECRET) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
   try {
-    const price_changes = await getPriceChanges();
-    res.status(200).json(price_changes);
+    const priceChanges = await getPriceChanges();
+    res.status(200).json(priceChanges);
   } catch (error) {
-    res.status(404).json({ found: "Nothing at all!" });
+    res.status(500).json({ error: error });
   }
 };

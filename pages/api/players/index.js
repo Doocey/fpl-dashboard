@@ -3,7 +3,7 @@
  * Accesible via `/api/changes/` - returns list of 7 items from stored changes DB collection
  */
 
-import { getLivePlayerPrices } from "../../../util/getLivePlayerPrices";
+import { getLivePlayerPrices } from "@/util/getLivePlayerPrices";
 
 export default async (req, res) => {
   try {

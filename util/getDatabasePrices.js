@@ -1,4 +1,5 @@
-import { connectToDatabase } from "../util/mongodb";
+import { connectToDatabase } from "@/util/mongodb";
+
 const { MONGODB_PRICE_COLLECTION } = process.env;
 
 export async function getDatabasePrices() {
