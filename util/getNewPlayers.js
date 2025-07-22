@@ -7,36 +7,35 @@ const { MONGODB_PRICE_COLLECTION } = process.env;
 export async function getNewPlayers() {
   try {
     const { db } = await connectToDatabase();
-    // Grab live prices & stored prices to compare against
-    const live_players = await getLivePlayerPrices();
-    const db_players = await getDatabasePrices();
+    const livePlayers = await getLivePlayerPrices();
+    const dbPlayers = await getDatabasePrices();
 
-    const ids_of_live_players = live_players.map(
-      ({ id, first_name, second_name, now_cost, web_name }) => ({
+    // Use a Set for faster lookups
+    const dbIds = new Set(dbPlayers.map(({ _id }) => _id));
+
+    // Filter and map only new players
+    // TODO: Potentially extend this call to also store updated players (EPL -> EPL transfer deals)
+    const newPlayers = livePlayers
+      .filter(({ id }) => !dbIds.has(id))
+      .map(({ id, first_name, second_name, now_cost, web_name, team }) => ({
         _id: id,
         first_name,
         second_name,
         web_name,
-        price: now_cost
-      })
-    );
+        price: now_cost,
+        team_id: team
+      }));
 
-    const ids_of_db_players = db_players.map(({ _id }) => _id);
+    if (newPlayers.length === 0) return "No new players to be added";
 
-    const newly_added_players = ids_of_live_players.filter(
-      (player) => !ids_of_db_players.includes(player._id)
-    );
+    // Insert new players into the DB
+    await db.collection(MONGODB_PRICE_COLLECTION).insertMany(newPlayers);
 
-    if (newly_added_players.length) {
-      await db
-        .collection(MONGODB_PRICE_COLLECTION)
-        .insertMany(newly_added_players);
+    const playerNames = newPlayers.map(({ web_name }) => web_name).join(", ");
 
-      return `${newly_added_players.length} newly added`;
-    } else {
-      return "No new players to be added";
-    }
+    return `${newPlayers.length} newly added: [${playerNames}]`;
   } catch (error) {
-    return "Something went wrong";
+    console.error("Error in getNewPlayers:", error);
+    throw error;
   }
 }
