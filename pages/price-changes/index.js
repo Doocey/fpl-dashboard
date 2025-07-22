@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
-import { getPriceChanges } from "../../util/getPriceChanges";
+import { getPriceChanges } from "@/util/getPriceChanges";
 
 export default function PriceChanges({ prices }) {
   // Parse our list of price changes for the week, since it's coming through as a <string>
-  const price_changes_week = JSON.parse(prices);
+  const priceChangesWeek = JSON.parse(prices);
 
   return (
     <section className="mx-auto container my-4">
@@ -71,7 +71,7 @@ export default function PriceChanges({ prices }) {
         </h2>
         <hr />
 
-        {price_changes_week.map((pc) => (
+        {priceChangesWeek.map((pc) => (
           <div className="w-100 md:w-3/4 mx-auto mb-5" key={pc._id}>
             <h2 className="text-2xl font-bold text-center pt-4 pb-3 text-gray-800">
               {new Date(pc._id).toDateString()}:

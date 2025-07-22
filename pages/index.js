@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
-import { getLivePlayerPrices } from "../util/getLivePlayerPrices";
+import { getLivePlayerPrices } from "@/util/getLivePlayerPrices";
 
 export default function Home({ players }) {
   return (
