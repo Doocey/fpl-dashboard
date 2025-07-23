@@ -1,3 +1,5 @@
+const isPreview = process.env.VERCEL_TARGET_ENV !== "production";
+
 module.exports = {
   images: {
     domains: ["resources.premierleague.com"],
@@ -10,5 +12,16 @@ module.exports = {
     // this will just update topLevelAwait property of config.experiments
     // config.experiments.topLevelAwait = true
     return config;
+  },
+  async headers() {
+    if (isPreview) {
+      return [
+        {
+          source: "/:path*",
+          headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }]
+        }
+      ];
+    }
+    return [];
   }
 };
