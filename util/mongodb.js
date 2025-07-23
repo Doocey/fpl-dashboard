@@ -1,11 +1,9 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ServerApiVersion } from "mongodb";
 
 const { MONGODB_URI, MONGODB_DB } = process.env;
 
 if (!MONGODB_URI || !MONGODB_DB) {
-  throw new Error(
-    "Please define the MONGODB_URI & MONGODB_DB environment variable inside .env.local"
-  );
+  throw new Error("Please define both MONGODB_URI & MONGODB_DB env variables");
 }
 
 /**
@@ -23,7 +21,13 @@ export async function connectToDatabase() {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
-    const client = new MongoClient(MONGODB_URI);
+    const client = new MongoClient(MONGODB_URI, {
+      serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true
+      }
+    });
 
     cached.promise = client.connect().then(() => {
       return {
