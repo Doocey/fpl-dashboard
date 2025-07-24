@@ -1,6 +1,7 @@
 const isPreview = process.env.VERCEL_TARGET_ENV !== "production";
 
 module.exports = {
+  bundlePagesRouterDependencies: true,
   images: {
     domains: ["resources.premierleague.com"],
     loader: "default", // Prevents Vercel's optimization
