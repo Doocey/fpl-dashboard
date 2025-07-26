@@ -4,91 +4,102 @@ import { getLivePlayerPrices } from "./getLivePlayerPrices";
 const { MONGODB_PRICE_COLLECTION, MONGODB_PRICE_CHANGES_COLLECTION } =
   process.env;
 
-export async function getPriceChanges() {
+export async function getPriceChanges({ showHistorical = false } = {}) {
   try {
-    const live_prices = await getLivePlayerPrices();
-    const { db } = await connectToDatabase();
+    const [livePlayers, { db }] = await Promise.all([
+      getLivePlayerPrices(),
+      connectToDatabase()
+    ]);
 
-    // Players from API with recent price changes
-    const players_with_changes = live_prices.filter(
+    // Filter players with recent price changes
+    const playersWithChanges = livePlayers.filter(
       (player) =>
         player.cost_change_event > 0 || player.cost_change_event_fall > 0
     );
 
-    // exit early if no marked price changes
-    if (players_with_changes.length === 0) return [];
+    if (playersWithChanges.length === 0) {
+      /**
+       * If showHistorical is true, return 7 day data (used in price-changes page); otherwise return []
+       * TODO: Refactor this after season starts, as likelihood of 0 price changes after GW 1 is exceptionally low
+       */
+      if (showHistorical) {
+        return await db
+          .collection(MONGODB_PRICE_CHANGES_COLLECTION)
+          .find()
+          .sort({ _id: -1 })
+          .limit(7)
+          .toArray();
+      }
+      return "No price changes today";
+    }
 
-    // Crossmatch players_with_changes with players from our own DB
-    const db_players = await db
+    // Get database players
+    const dbPlayers = await db
       .collection(MONGODB_PRICE_COLLECTION)
       .find({
-        _id: { $in: players_with_changes.map((player) => player.id) }
+        _id: { $in: playersWithChanges.map((player) => player.id) }
       })
       .toArray();
 
-    // Players with changes that arent in sync with our DB
-    const db_players_pending_change = players_with_changes.filter(
-      ({ now_cost, id }) =>
-        now_cost !== db_players.find(({ _id }) => _id === id)?.price
-    );
+    // Create lookup map for performance gain
+    const playerMap = new Map(dbPlayers.map((player) => [player._id, player]));
 
-    if (db_players_pending_change.length) {
+    // Find players needing updates
+    const playersToUpdate = playersWithChanges.filter((player) => {
+      const dbPlayer = playerMap.get(player.id);
+      return dbPlayer && player.now_cost !== dbPlayer.price;
+    });
+
+    if (playersToUpdate.length > 0) {
       const risers = [];
       const fallers = [];
 
-      db_players_pending_change.forEach((player) => {
-        const single_player = db_players.find(({ _id }) => _id === player.id);
+      // Categorize price changes
+      for (const player of playersToUpdate) {
+        const dbPlayer = playerMap.get(player.id);
 
-        if (
-          player.now_cost > single_player.price ||
-          player.now_cost < single_player.price
-        ) {
-          (player.now_cost > single_player.price ? risers : fallers).push({
-            id: player.id,
-            first_name: player.first_name,
-            second_name: player.second_name,
-            short_name: player.web_name,
-            old_price: single_player.price,
-            new_price: player.now_cost,
-            percentage_ownership: player.selected_by_percent
-          });
-        }
-      });
+        const priceChange = {
+          id: player.id,
+          first_name: player.first_name,
+          second_name: player.second_name,
+          short_name: player.web_name,
+          old_price: dbPlayer.price,
+          new_price: player.now_cost,
+          percentage_ownership: player.selected_by_percent
+        };
 
-      // Update DB prices to reflect players new price, use bulkWrite for better perf
-      await db
-        .collection(MONGODB_PRICE_COLLECTION)
-        .bulkWrite(
-          db_players_pending_change.map(({ now_cost, id }) => {
-            return {
-              updateOne: {
-                filter: { _id: id },
-                update: { $set: { price: now_cost } }
-              }
-            };
-          })
-        )
-        .catch((err) => err);
+        player.now_cost > dbPlayer.price
+          ? risers.push(priceChange)
+          : fallers.push(priceChange);
+      }
 
-      // Add record in our daily changes table with any changes
+      // Update DB prices
+      await db.collection(MONGODB_PRICE_COLLECTION).bulkWrite(
+        playersToUpdate.map((player) => ({
+          updateOne: {
+            filter: { _id: player.id },
+            update: { $set: { price: player.now_cost } }
+          }
+        }))
+      );
+
+      // Record price changes
       await db.collection(MONGODB_PRICE_CHANGES_COLLECTION).insertOne({
-        _id: new Date(),
         date: new Date().toDateString(),
-        fallers: fallers,
-        risers: risers
+        risers,
+        fallers
       });
     }
 
-    // Render the last 7 days of price changes
-    const daily_changes = await db
+    // Return recent changes (7 days)
+    return await db
       .collection(MONGODB_PRICE_CHANGES_COLLECTION)
-      .find({})
-      .limit(7)
+      .find()
       .sort({ _id: -1 })
+      .limit(7)
       .toArray();
-
-    return daily_changes;
   } catch (error) {
-    return error;
+    console.error("Error in getPriceChanges:", error);
+    throw error;
   }
 }

@@ -33,3 +33,4 @@ yarn-error.log*
 initial-player-db-population.js
 dummy-data.json
 dummy-changes.json
+bruno.json
