@@ -64,17 +64,24 @@ export default function PriceChanges({ prices }) {
         </h1>
         <h2 className="text-center text-lg sm:text-2xl pb-4">
           Recorded price rises/falls for the past week in the FPL. <br />
-          Auto-posted on Twitter{" "}
+          Auto-posted on <strong>Twitter</strong>{" "}
           <Link href="https://twitter.com/PriceChangeFPL" className="underline">
             @PriceChangeFPL
+          </Link>{" "}
+          &amp; newly added for 25/26 season — <strong>Bluesky</strong>{" "}
+          <Link
+            href="https://bsky.app/profile/pricechangefpl.bsky.social"
+            className="underline"
+          >
+            @pricechangefpl.bsky.social
           </Link>
         </h2>
         <hr />
 
-        {priceChangesWeek.map((pc) => (
+        {priceChangesWeek?.map((pc) => (
           <div className="w-100 md:w-3/4 mx-auto mb-5" key={pc._id}>
             <h2 className="text-2xl font-bold text-center pt-4 pb-3 text-gray-800">
-              {new Date(pc._id).toDateString()}:
+              {new Date(pc.date).toDateString()}:
             </h2>
             <table className="w-full lg:w-4/5 mx-auto shadow-lg border-b border-gray-200 sm:rounded-lg">
               <thead className="bg-gray-200 text-gray-500">
@@ -140,7 +147,7 @@ export default function PriceChanges({ prices }) {
 
 export async function getStaticProps() {
   // Grab our price changes, if there any & stringify to avoid date object issues when passing props
-  const data = await getPriceChanges();
+  const data = await getPriceChanges({ showHistorical: true });
   const prices = JSON.stringify(data);
 
   return {

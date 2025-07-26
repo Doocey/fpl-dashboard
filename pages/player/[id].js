@@ -5,9 +5,8 @@ import PlayerProfile from "@/components/PlayerProfile";
 // Extract player object from data in 'props
 export default function Player({ player }) {
   // Form the player's full name using string concat method this time - could have constructed different ways, but trying this out
-  const metaDescription = `Fantasy League profile for ${
-    player.team.name
-  }'s ${player.first_name.concat(" ", player.second_name)}`;
+  const metaDescription = `Fantasy League profile for ${player.first_name}
+    ${player.second_name}`;
   // Form player profile photo
   const playerImage = `https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace(
     ".jpg",

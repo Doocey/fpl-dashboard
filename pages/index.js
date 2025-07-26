@@ -9,12 +9,12 @@ export default function Home({ players }) {
     <div className="lg:container mx-4 lg:mx-auto">
       <Head>
         <title>
-          Fantasy Premier League Dashboard - Price Changes & Game Stats.
+          Fantasy Premier League Dashboard - Price Changes & Game Stats
         </title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content="Daily FPL Price Changes & player statistics for the 2024/25 season."
+          content="Daily FPL Price Changes & player statistics for the 2025/26 season."
         />
 
         <meta property="og:type" content="website" />
@@ -25,7 +25,7 @@ export default function Home({ players }) {
         />
         <meta
           property="og:description"
-          content="Daily FPL Price Changes & player statistics for the 2024/25 season."
+          content="Daily FPL Price Changes & player statistics for the 2025/26 season."
         />
         <meta
           property="og:image"
@@ -40,7 +40,7 @@ export default function Home({ players }) {
         />
         <meta
           property="twitter:description"
-          content="Daily FPL Price Changes & player statistics for the 2024/25 season."
+          content="Daily FPL Price Changes & player statistics for the 2025/26 season."
         />
         <meta
           property="twitter:image"
@@ -66,34 +66,34 @@ export default function Home({ players }) {
         </p>
 
         <div className="flex flex-wrap justify-between items-center">
-          {players
-            .sort((a, b) => a.total_points < b.total_points)
-            .map((player) => (
-              <Link
-                href={"/player/" + player.id.toString()}
-                key={player.id.toString()}
-                className="w-1/2 sm:w-1/3 md:w-1/6 h-100 cursor-pointer"
-              >
-                <div className="block bg-gray border-2 border-gray-200 shadow-sm m-1 p-3 md:px-3 text-center">
-                  <Image
-                    src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace(
-                      ".jpg",
-                      ".png"
-                    )}`}
-                    alt={player.web_name}
-                    width={106}
-                    height={130}
-                    className="w-full"
-                  />
-                  <h4 className="text-xl font-semibold">{player.web_name}</h4>
-                  <h5 className="font-semibold text-emerald-600 py-1">
-                    &pound;{(player.now_cost / 10).toFixed(1)}m
-                  </h5>
-                  <h6>Points: {player.total_points}</h6>
-                  <code className="text-xs">ID: {player.id}</code>
-                </div>
-              </Link>
-            ))}
+          {players?.map((player) => (
+            <Link
+              href={`/player/${player.id}`}
+              key={player.id}
+              className="w-1/2 sm:w-1/3 md:w-1/6 h-100 cursor-pointer"
+            >
+              <div className="block bg-gray border-2 border-gray-200 shadow-sm m-1 p-3 md:px-3 text-center">
+                <Image
+                  src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace(
+                    ".jpg",
+                    ".png"
+                  )}`}
+                  alt={player.web_name}
+                  width={106}
+                  height={130}
+                  className="w-full"
+                />
+                <h4 className="text-xl font-semibold py-2">
+                  {player.web_name}
+                </h4>
+                <h5 className="font-semibold text-emerald-600">
+                  &pound;{(player.now_cost / 10).toFixed(1)}m
+                </h5>
+                <h6>Points: {player.total_points}</h6>
+                <code className="text-xs">ID: {player.id}</code>
+              </div>
+            </Link>
+          ))}
         </div>
       </main>
     </div>
@@ -101,14 +101,7 @@ export default function Home({ players }) {
 }
 
 export async function getStaticProps() {
-  /**
-   * Grab default FPL data from endpoint
-   * Filter returned json to include all players
-   * that do not have a status of 'u' - meaning unavailable
-   * Only active players in the FPL will be included and further reduces the size
-   * of data we pass through to component
-   * Limit to first 20 for sanity sake
-   */
+  // Grab top 15 scoring players on the game
 
   const res = await getLivePlayerPrices();
   const players = res
