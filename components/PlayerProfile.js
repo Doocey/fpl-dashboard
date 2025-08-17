@@ -1,15 +1,11 @@
 import Image from "next/image";
 
 export default function PlayerProfile({ props }) {
-  const profile_image = `https://resources.premierleague.com/premierleague/photos/players/110x140/p${props.photo.replace(
-    ".jpg",
-    ".png"
-  )}`;
   return (
     <div className="p-10 text-center">
       <div className="max-w-sm rounded overflow-hidden shadow-lg mx-auto">
         <Image
-          src={profile_image}
+          src={props.photo}
           alt={props.web_name}
           width={220}
           height={280}
@@ -57,12 +53,10 @@ export default function PlayerProfile({ props }) {
             )}
           </p>
         </div>
-        {props.news.length ? (
+        {props.news && (
           <mark className="block p-2 leading-relaxed bg-red-600 text-white text-sm">
             🚨 {props.news}
           </mark>
-        ) : (
-          ""
         )}
       </div>
     </div>

@@ -8,7 +8,7 @@ export async function getDatabasePrices() {
     try {
       const players = await db
         .collection(MONGODB_PRICE_COLLECTION)
-        .find({})
+        .find()
         .toArray();
       return players;
     } catch (error) {
