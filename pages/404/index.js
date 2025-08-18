@@ -14,7 +14,7 @@ export default function FourOhFour() {
         alt={`Page not found, but here's a nice dog`}
         width="1500"
         height="500"
-        className="nf-image"
+        className="w-full"
       />
       <div className="container py-5">
         <main className="w-11/12 sm:w-8/12 mx-auto">

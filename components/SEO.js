@@ -7,6 +7,7 @@ export default function SEO({ title, description, url, image }) {
       <meta name="description" content={description} />
 
       <link rel="icon" href="/favicon.ico" />
+      <link rel="canonical" href={url || "https://fpldashboard.dev/"} />
       <meta name="description" content={description} />
 
       <meta property="og:type" content="website" />

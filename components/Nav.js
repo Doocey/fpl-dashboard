@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-function Nav() {
+export default function Nav() {
   return (
     <nav className="bg-emerald-900">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -12,7 +12,6 @@ function Nav() {
             >
               Home
             </Link>
-
             <Link
               href="/price-changes"
               className="text-gray-200 hover:bg-emerald-800 hover:text-white p-3 text-sm sm:text-lg md:text-xl font-medium"
@@ -25,5 +24,3 @@ function Nav() {
     </nav>
   );
 }
-
-export default Nav;
