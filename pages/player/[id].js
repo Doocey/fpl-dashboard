@@ -1,31 +1,32 @@
-import Head from "next/head";
 import { getLivePlayerPrices } from "@/util/getLivePlayerPrices";
 import PlayerProfile from "@/components/PlayerProfile";
+import SEO from "@/components/SEO";
 
 // Extract player object from data in 'props
 export default function Player({ player }) {
-  // Form the player's full name using string concat method this time - could have constructed different ways, but trying this out
-  const metaDescription = `Fantasy League profile for ${player.first_name}
-    ${player.second_name}`;
-  // Form player profile photo
-  const playerImage = `https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace(
+  const metaDescription = `Fantasy League profile for ${player.first_name} ${player.second_name}`;
+
+  const playerImage = `https://resources.premierleague.com/premierleague25/photos/players/110x140/${player.photo.replace(
     ".jpg",
     ".png"
   )}`;
 
   return (
     <>
-      <Head>
-        <title>{player.web_name}</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content={metaDescription} />
-        <meta property="og:image" content={playerImage} />
-      </Head>
+      <SEO
+        title={player.web_name}
+        description={metaDescription}
+        url={`https://fpldashboard.dev/player/${player.id}`}
+        image={playerImage}
+      />
 
-      <main>
-        <div className="container mx-auto">
-          <PlayerProfile props={player} />
-        </div>
+      <main className="container mx-auto">
+        <PlayerProfile
+          props={{
+            ...player,
+            photo: playerImage
+          }}
+        />
       </main>
     </>
   );
@@ -34,8 +35,7 @@ export default function Player({ player }) {
 export async function getStaticProps({ params }) {
   const allPlayers = await getLivePlayerPrices();
 
-  // Find Player from list of player based on {params} id, which we need to turn into a string
-  const player = allPlayers.find((player) => player.id == params.id.toString());
+  const player = allPlayers.find((player) => player.id == params.id);
 
   return {
     props: {
@@ -46,10 +46,8 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  // Call an external API endpoint to get posts
   const players = await getLivePlayerPrices();
 
-  // Get the paths we want to pre-render based on posts, needs to be string
   const paths = players.map((player) => ({
     params: { id: player.id.toString() }
   }));

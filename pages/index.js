@@ -1,110 +1,82 @@
-import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import SEO from "@/components/SEO";
 
 import { getLivePlayerPrices } from "@/util/getLivePlayerPrices";
 
 export default function Home({ players }) {
   return (
-    <div className="lg:container mx-4 lg:mx-auto">
-      <Head>
-        <title>
-          Fantasy Premier League Dashboard - Price Changes & Game Stats
-        </title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content="Daily FPL Price Changes & player statistics for the 2025/26 season."
-        />
+    <>
+      <SEO
+        title="Fantasy Premier League Dashboard - Price Changes & Game Stats"
+        description="Daily FPL Price Changes & player statistics for the 2025/26 season."
+        url="https://fpldashboard.dev/"
+        image="https://fpldashboard.dev/fpl-price-changes.png"
+      />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://fpldashboard.dev/" />
-        <meta
-          property="og:title"
-          content="Fantasy Premier League Dashboard - Price Changes & Game Stats."
-        />
-        <meta
-          property="og:description"
-          content="Daily FPL Price Changes & player statistics for the 2025/26 season."
-        />
-        <meta
-          property="og:image"
-          content="https://fpldashboard.dev/fpl-price-changes.png"
-        />
+      <div className="container mx-auto px-4">
+        <main className="py-4">
+          <h1 className="text-3xl sm:text-5xl font-semibold py-4 md:pt-6 md:pb-8">
+            25/26 EPL Fantasy League Players
+          </h1>
 
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://fpldashboard.dev/" />
-        <meta
-          property="twitter:title"
-          content="Fantasy Premier League Dashboard - Price Changes & Game Stats."
-        />
-        <meta
-          property="twitter:description"
-          content="Daily FPL Price Changes & player statistics for the 2025/26 season."
-        />
-        <meta
-          property="twitter:image"
-          content="https://fpldashboard.dev/fpl-price-changes.png"
-        />
-      </Head>
+          <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-4">
+            A list of all currently <em>available</em> top 15 scoring players
+            for the 25/26 Premier League season. Anyone not on the list is out
+            on loan, has left the club permanently, or has not made their club's
+            registered squad list.
+          </p>
 
-      <main className="py-4">
-        <h1 className="text-4xl sm:text-6xl font-semibold py-4 md:pt-6 md:pb-8">
-          Fantasy League Players
-        </h1>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            {players?.map((player, index) => (
+              <Link href={`/player/${player.id}`} key={player.id}>
+                <div className="grid gap-3 border-2 border-gray-200 shadow-sm m-1 p-3 text-center rounded-lg h-full relative">
+                  {index === 0 && (
+                    <span className="absolute top-0 left-0 text-md px-2 py-1 border-r-2 border-b-2 bg-gray-200 font-semibold">
+                      #1
+                    </span>
+                  )}
+                  <Image
+                    src={`https://resources.premierleague.com/premierleague25/photos/players/110x140/${player.photo.replace(
+                      ".jpg",
+                      ".png"
+                    )}`}
+                    alt={player.web_name}
+                    width={180}
+                    height={220}
+                    className="mx-auto hover:opacity-70 transition duration-300"
+                  />
+                  <h3 className="text-lg sm:text-xl font-semibold">
+                    {player.web_name}
+                  </h3>
+                  <span className="rounded-full mx-auto text-lg font-medium bg-gray-300 px-3 text-gray-600 w-fit">
+                    &pound;{(player.now_cost / 10).toFixed(1)}m
+                  </span>
+                  <div className="sm:text-lg">
+                    Total:
+                    <span className="text-emerald-700 font-bold pl-2">
+                      {player.total_points}pts
+                    </span>
+                  </div>
 
-        <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-4">
-          A list of all currently <em>available</em> top 15 scoring players,
-          with their unique idenifier. Anyone not on the list is out on loan,
-          has left the club permanently, or has not made their club's registered
-          squad list.
-        </p>
-
-        <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-6">
-          Each tile should route you to a specific player profile - using{" "}
-          <span className="underline">Next.js'</span> Dynamic Routing.
-        </p>
-
-        <div className="flex flex-wrap justify-between items-center">
-          {players?.map((player) => (
-            <Link
-              href={`/player/${player.id}`}
-              key={player.id}
-              className="w-1/2 sm:w-1/3 md:w-1/6 h-100 cursor-pointer"
-            >
-              <div className="block bg-gray border-2 border-gray-200 shadow-sm m-1 p-3 md:px-3 text-center">
-                <Image
-                  src={`https://resources.premierleague.com/premierleague/photos/players/110x140/p${player.photo.replace(
-                    ".jpg",
-                    ".png"
-                  )}`}
-                  alt={player.web_name}
-                  width={106}
-                  height={130}
-                  className="w-full"
-                />
-                <h4 className="text-xl font-semibold py-2">
-                  {player.web_name}
-                </h4>
-                <h5 className="font-semibold text-emerald-600">
-                  &pound;{(player.now_cost / 10).toFixed(1)}m
-                </h5>
-                <h6>Points: {player.total_points}</h6>
-                <code className="text-xs">ID: {player.id}</code>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </main>
-    </div>
+                  <button className="bg-transparent hover:bg-emerald-700 hover:text-white text-emerald-700 font-semibold py-2 px-3 border border-gray-300 hover:border-transparent rounded text-xs sm:text-sm">
+                    View {player.first_name}'s profile &rarr;
+                  </button>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </main>
+      </div>
+    </>
   );
 }
 
 export async function getStaticProps() {
   // Grab top 15 scoring players on the game
+  const allPlayers = await getLivePlayerPrices();
 
-  const res = await getLivePlayerPrices();
-  const players = res
+  const players = allPlayers
     .sort((player, nextPlayer) => nextPlayer.total_points - player.total_points)
     .slice(0, 15);
   return {

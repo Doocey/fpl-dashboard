@@ -1,105 +1,67 @@
-import Head from "next/head";
 import Link from "next/link";
 import { getPriceChanges } from "@/util/getPriceChanges";
+import SEO from "@/components/SEO";
 
 export default function PriceChanges({ prices }) {
   // Parse our list of price changes for the week, since it's coming through as a <string>
   const priceChangesWeek = JSON.parse(prices);
 
   return (
-    <section className="mx-auto container my-4">
-      <Head>
-        <title>Fantasy Premier League Price Changes</title>
-        <meta
-          name="description"
-          content="FPL Price Changes updated daily. Keep track of weekly price movers to help improve your game."
-        />
+    <>
+      <SEO
+        title="Fantasy Premier League Price Changes"
+        description="FPL Price Changes updated daily. Keep track of weekly price movers to help improve your game."
+        url="https://fpldashboard.dev/price-changes"
+        image="https://fpldashboard.dev/fpl-price-changes.png"
+      />
+      <section className="mx-auto container my-4">
+        <main className="w-11/12 md:w-3/4 mx-auto">
+          <h1 className="text-3xl sm:text-5xl text-center font-semibold py-4 md:pt-6 md:pb-8">
+            FPL Price Changes
+          </h1>
+          <h2 className="text-center text-lg sm:text-2xl pb-4">
+            Recorded price rises/falls for the past week in the Fantasy Premier
+            League. <br />
+            <br />
+            Auto-posted on <strong>Twitter</strong>{" "}
+            <Link
+              href="https://twitter.com/PriceChangeFPL"
+              className="underline"
+            >
+              @PriceChangeFPL
+            </Link>{" "}
+            &amp; newly added for the 25/26 season — <strong>Bluesky</strong>{" "}
+            <Link
+              href="https://bsky.app/profile/pricechangefpl.bsky.social"
+              className="underline text-sky-600"
+            >
+              @pricechangefpl.bsky.social
+            </Link>
+          </h2>
+          <hr />
 
-        <meta name="title" content="Fantasy Premier League Price Changes" />
-
-        {/* <!-- Open Graph / Facebook --> */}
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://fpldashboard.dev/price-changes"
-        />
-        <meta
-          property="og:title"
-          content="Fantasy Premier League Price Changes"
-        />
-        <meta
-          property="og:description"
-          content="FPL Price Changes updated daily. Keep track of weekly price movers to help improve your game."
-        />
-        <meta
-          property="og:image"
-          content="https://fpldashboard.dev/fpl-price-changes.png"
-        />
-
-        {/* <!-- Twitter --> */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://fpldashboard.dev/price-changes"
-        />
-        <meta
-          property="twitter:title"
-          content="Fantasy Premier League Price Changes"
-        />
-        <meta
-          property="twitter:description"
-          content="FPL Price Changes updated daily. Keep track of weekly price movers to help improve your game."
-        />
-        <meta
-          property="twitter:image"
-          content="https://fpldashboard.dev/fpl-price-changes.png"
-        />
-
-        <link rel="canonical" href="https://fpldashboard.dev/price-changes" />
-      </Head>
-
-      <main className="w-11/12 md:w-3/4 mx-auto">
-        <h1 className="text-center text-4xl sm:text-6xl font-semibold py-3 md:pt-6 md:pb-5">
-          FPL Price Changes
-        </h1>
-        <h2 className="text-center text-lg sm:text-2xl pb-4">
-          Recorded price rises/falls for the past week in the FPL. <br />
-          Auto-posted on <strong>Twitter</strong>{" "}
-          <Link href="https://twitter.com/PriceChangeFPL" className="underline">
-            @PriceChangeFPL
-          </Link>{" "}
-          &amp; newly added for 25/26 season — <strong>Bluesky</strong>{" "}
-          <Link
-            href="https://bsky.app/profile/pricechangefpl.bsky.social"
-            className="underline"
-          >
-            @pricechangefpl.bsky.social
-          </Link>
-        </h2>
-        <hr />
-
-        {priceChangesWeek?.map((pc) => (
-          <div className="w-100 md:w-3/4 mx-auto mb-5" key={pc._id}>
-            <h2 className="text-2xl font-bold text-center pt-4 pb-3 text-gray-800">
-              {new Date(pc.date).toDateString()}:
-            </h2>
-            <table className="w-full lg:w-4/5 mx-auto shadow-lg border-b border-gray-200 sm:rounded-lg">
-              <thead className="bg-gray-200 text-gray-500">
-                <tr>
-                  <th className="px-4 sm:px-5 py-3 text-left text-xs uppercase tracking-wider">
-                    Player
-                  </th>
-                  <th className="px-2 sm:px-4 py-3 text-left text-xs uppercase tracking-wider">
-                    New Price:
-                  </th>
-                  <th className="px-2 sm:px-4 py-3 text-left text-xs uppercase tracking-wider">
-                    Owned By:
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {pc.risers
-                  ? pc.risers.map((p) => (
+          {priceChangesWeek?.map((pc) => (
+            <div className="w-100 md:w-3/4 mx-auto mb-3 sm:mb-5" key={pc._id}>
+              <h2 className="text-2xl font-bold text-center pt-4 pb-3 text-gray-800">
+                {new Date(pc.date).toDateString()}:
+              </h2>
+              <table className="w-full lg:w-4/5 mx-auto shadow-lg border-b border-gray-200 rounded-xls">
+                <thead className="bg-gray-200 text-gray-500">
+                  <tr>
+                    <th className="px-4 sm:px-5 py-3 text-left text-xs uppercase tracking-wider">
+                      Player
+                    </th>
+                    <th className="px-2 sm:px-4 py-3 text-left text-xs uppercase tracking-wider">
+                      New Price:
+                    </th>
+                    <th className="px-2 sm:px-4 py-3 text-left text-xs uppercase tracking-wider">
+                      Owned By:
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {pc.risers &&
+                    pc.risers.map((p) => (
                       <tr
                         className="bg-emerald-800 text-emerald-800"
                         key={p._id}
@@ -116,11 +78,10 @@ export default function PriceChanges({ prices }) {
                           </span>
                         </td>
                       </tr>
-                    ))
-                  : ""}
+                    ))}
 
-                {pc.fallers
-                  ? pc.fallers.map((p) => (
+                  {pc.fallers &&
+                    pc.fallers.map((p) => (
                       <tr className="bg-red-700 text-red-800" key={p.id}>
                         <td className="px-4 sm:px-6 py-3 text-md font-medium text-white">
                           <Link href={`/player/${p.id}`}>{p.short_name}</Link>
@@ -134,14 +95,14 @@ export default function PriceChanges({ prices }) {
                           </span>
                         </td>
                       </tr>
-                    ))
-                  : ""}
-              </tbody>
-            </table>
-          </div>
-        ))}
-      </main>
-    </section>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </main>
+      </section>
+    </>
   );
 }
 
