@@ -18,10 +18,7 @@ export async function getPriceChanges({ showHistorical = false } = {}) {
     );
 
     if (playersWithChanges.length === 0) {
-      /**
-       * If showHistorical is true, return 7 day data (used in price-changes page); otherwise return []
-       * TODO: Refactor this after season starts, as likelihood of 0 price changes after GW 1 is exceptionally low
-       */
+      // If showHistorical is true, return 7 day data (used in price-changes page); otherwise return []
       if (showHistorical) {
         return await db
           .collection(MONGODB_PRICE_CHANGES_COLLECTION)
@@ -91,12 +88,12 @@ export async function getPriceChanges({ showHistorical = false } = {}) {
       });
     }
 
-    // Return recent changes (7 days)
+    // Return recent changes (7days of records if called via price-changes page, 1 if called via API)
     return await db
       .collection(MONGODB_PRICE_CHANGES_COLLECTION)
       .find()
       .sort({ _id: -1 })
-      .limit(7)
+      .limit(showHistorical ? 7 : 1)
       .toArray();
   } catch (error) {
     console.error("Error in getPriceChanges:", error);
