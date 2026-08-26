@@ -30,7 +30,7 @@ export default function PriceChanges({ prices }) {
             >
               @PriceChangeFPL
             </Link>{" "}
-            &amp; newly added for the 25/26 season — <strong>Bluesky</strong>{" "}
+            &amp; <strong>Bluesky</strong>{" "}
             <Link
               href="https://bsky.app/profile/pricechangefpl.bsky.social"
               className="underline text-sky-600"

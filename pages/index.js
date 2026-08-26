@@ -9,7 +9,7 @@ export default function Home({ players }) {
     <>
       <SEO
         title="Fantasy Premier League Dashboard - Price Changes & Game Stats"
-        description="Daily FPL Price Changes & player statistics for the 2025/26 season."
+        description="Daily FPL Price Changes & player statistics for the 2026/27 season."
         url="https://fpldashboard.dev/"
         image="https://fpldashboard.dev/fpl-price-changes.png"
       />
@@ -17,12 +17,12 @@ export default function Home({ players }) {
       <div className="container mx-auto px-4">
         <main className="py-4">
           <h1 className="text-3xl sm:text-5xl font-semibold py-4 md:pt-6 md:pb-8">
-            25/26 EPL Fantasy League Players
+            26/27 EPL Fantasy League Players
           </h1>
 
           <p className="text-sm md:text-lg lg:text-xl text-gray-700 pb-4">
             A list of all currently <em>available</em> top 15 scoring players
-            for the 25/26 Premier League season. Anyone not on the list is out
+            for the 26/27 Premier League season. Anyone not on the list is out
             on loan, has left the club permanently, or has not made their club's
             registered squad list.
           </p>
